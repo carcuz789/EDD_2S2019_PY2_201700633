@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
  * @author Rodrigo Carcuz
  */
 class NodoHash{
+    char estado;
     String usuario;
     String contraseña;
     public NodoHash(String usuario, String contraseña){
@@ -124,5 +125,52 @@ public class TablaHash {
             rehashing();
             insertar(nombreVar,contra);
         }
+    }
+    private void rehashing(){
+        NodoHash [] temp = vectorHash;
+        int tamanoTemp = tamano;
+        if (indiceTam<tamanos.length) {
+            indiceTam+=1;
+            if (indiceTam==tamanos.length-1) {
+                JOptionPane.showMessageDialog(null,"SE ALCANZO EL MAXIMO DE LA TABLA HASH  " );
+            }
+        }
+        tamano=tamanos[indiceTam];
+        vectorHash = new NodoHash[tamano];
+        ocupados=0;
+        porcentajeUtil= calcularPorcentajeUtil();
+        for (int i = 0; i < tamanoTemp; i++) {
+            if (temp[i]!=null) {
+                insertar(temp[i].usuario,temp[i].contraseña);
+            }
+        }
+        JOptionPane.showMessageDialog(null,"REHASHING REALIZADO CON EXITO" );
+    }
+    public String extraerNodo(String nombreVar ){
+        boolean encontrado = false;
+        NodoHash temp =null;
+        int pos=0;
+        String Contraseña="";
+        for (int i = 0; i < tamano; i++) {
+            int posicion = DobleHashing(nombreVar,i);
+            if (posicion>=tamano) {
+                posicion-=tamano;
+                pos = posicion;
+            }
+            if (vectorHash[posicion]!= null) {
+                if (vectorHash[posicion].usuario.equals(nombreVar)) {
+                    temp = vectorHash[posicion];
+                    Contraseña = vectorHash[posicion].contraseña;
+                    encontrado = true;
+                    break;
+                }
+            }
+        }
+        if (encontrado) {
+            JOptionPane.showMessageDialog(null,"USUARIO ENCONTRADO EN LA POS ->"+pos );            
+        }else{
+            JOptionPane.showMessageDialog(null,"USUARIO NO ENCONTRADO" );
+        }
+        return Contraseña;
     }
 }
