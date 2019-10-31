@@ -5,15 +5,20 @@
  */
 package edd_2s2019_py2_201700633;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Rodrigo Carcuz
  */
 public class Inicio extends javax.swing.JFrame {
-
+ TablaHash Tabla = new TablaHash();
     /**
      * Creates new form Inicio
      */
+   
     public Inicio() {
         initComponents();
     }
@@ -58,6 +63,11 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         btn_ingresar.setText("Ingresar");
+        btn_ingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ingresarActionPerformed(evt);
+            }
+        });
 
         btn_registrar.setText("Registrar");
         btn_registrar.addActionListener(new java.awt.event.ActionListener() {
@@ -143,6 +153,36 @@ public class Inicio extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btn_registrarActionPerformed
 
+    private void btn_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresarActionPerformed
+        // TODO add your handling code here:
+        if (this.txt_usuario.getText()!="") {
+            String contraseña = this.Tabla.extraerNodo(this.txt_usuario.getText());
+            char[] contra = this.txt_contraseña.getPassword();
+            String pass = new String(contra);
+            String contra2 = getSHA256(pass);
+            if (contra2.equals(contraseña)) {
+                //aqui mando la info del usuario mediante una var global 
+                // abro el manejador de archivos
+            }
+        }else{
+             JOptionPane.showMessageDialog(null,"INGRESE UN USUARIO" );
+        }
+        
+    }//GEN-LAST:event_btn_ingresarActionPerformed
+    public static String getSHA256(String input){
+
+	String toReturn = null;
+	try {
+	    MessageDigest digest = MessageDigest.getInstance("SHA-256");
+	    digest.reset();
+	    digest.update(input.getBytes("utf8"));
+	    toReturn = String.format("%064x", new BigInteger(1, digest.digest()));
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	
+	return toReturn;
+    }
     /**
      * @param args the command line arguments
      */

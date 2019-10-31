@@ -5,17 +5,23 @@
  */
 package edd_2s2019_py2_201700633;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Rodrigo Carcuz
  */
 public class CrearUsuario extends javax.swing.JFrame {
-
+   Inicio hola;
     /**
      * Creates new form CrearUsuario
      */
     public CrearUsuario() {
         initComponents();
+        
+        
     }
 
     /**
@@ -45,6 +51,11 @@ public class CrearUsuario extends javax.swing.JFrame {
         jLabel3.setText("Contraseña");
 
         btn_registrar.setText("Registrar");
+        btn_registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_registrarActionPerformed(evt);
+            }
+        });
 
         btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
@@ -104,13 +115,45 @@ public class CrearUsuario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public static String getSHA256(String input){
 
+	String toReturn = null;
+	try {
+	    MessageDigest digest = MessageDigest.getInstance("SHA-256");
+	    digest.reset();
+	    digest.update(input.getBytes("utf8"));
+	    toReturn = String.format("%064x", new BigInteger(1, digest.digest()));
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	
+	return toReturn;
+    }
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
         // TODO add your handling code here:
         Inicio ini = new Inicio();
         ini.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_salirActionPerformed
+
+    private void btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarActionPerformed
+        // TODO add your handling code here:
+        if (this.txt_Usuario.getText()!="") {
+            if(this.txt_contraseña.getText().length()<8){
+                
+                 String Usuario = this.txt_Usuario.getText();
+                 String Contraseña = getSHA256(this.txt_contraseña.getText());
+                 hola.Tabla.insertar(Usuario, Contraseña);
+        
+            }else{
+                 JOptionPane.showMessageDialog(null,"INGRESE UNA CONTRASEÑA VALIDA" );
+            }
+            
+        }else{
+             JOptionPane.showMessageDialog(null,"INGRESE UN USUARIO" );
+        }
+        
+    }//GEN-LAST:event_btn_registrarActionPerformed
 
     /**
      * @param args the command line arguments
