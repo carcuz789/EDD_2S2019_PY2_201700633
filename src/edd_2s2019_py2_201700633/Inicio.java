@@ -21,6 +21,8 @@ public class Inicio extends javax.swing.JFrame {
    
     public Inicio() {
         initComponents();
+        String Contraseña = getSHA256("admin");
+        Tabla.insertar("admin",Contraseña );
     }
 
     /**
@@ -163,6 +165,12 @@ public class Inicio extends javax.swing.JFrame {
             if (contra2.equals(contraseña)) {
                 //aqui mando la info del usuario mediante una var global 
                 // abro el manejador de archivos
+                
+                ManejadorArch man = new ManejadorArch(this.txt_usuario.getText());
+                man.setVisible(true);
+                
+            }else{
+                JOptionPane.showMessageDialog(null,"CONTRASEÑA INCORRECTA" );
             }
         }else{
              JOptionPane.showMessageDialog(null,"INGRESE UN USUARIO" );

@@ -18,10 +18,12 @@ public class nodo_lateral {
       lista_para_fila fila;
 
     nodo_lateral (String f){
+        
         this.y = f;
         fila = new lista_para_fila();
         this.siguiente = null;
         this.anterior = null;
+        
     }
 
 }
