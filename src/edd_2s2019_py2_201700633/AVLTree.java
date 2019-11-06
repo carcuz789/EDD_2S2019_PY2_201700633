@@ -17,9 +17,13 @@ public class AVLTree {
         private Node left, right, parent;
         private int height = 1;
         private int value;
+        private String Nombre;
+        private String Contenido;
 
-        private Node (int val) {
+        private Node (int val,String Nombre,String Contenido) {
             this.value = val;
+            this.Nombre = Nombre;
+            this.Contenido = Contenido;
         }
     }
     private int height (Node N) {
@@ -28,16 +32,16 @@ public class AVLTree {
         return N.height;
     }
 
-    private Node insert(Node node, int value) {
+    private Node insert(Node node, int value,String Nombre,String Contenido) {
         /* 1.  Perform the normal BST rotation */
         if (node == null) {
-            return(new Node(value));
+            return(new Node(value,Nombre,Contenido));
         }
 
         if (value < node.value)
-            node.left  = insert(node.left, value);
+            node.left  = insert(node.left, value,Nombre,Contenido);
         else
-            node.right = insert(node.right, value);
+            node.right = insert(node.right, value,Nombre,Contenido);
 
         /* 2. Update height of this ancestor node */
         node.height = Math.max(height(node.left), height(node.right)) + 1;
@@ -301,35 +305,35 @@ public class AVLTree {
 
     }
 
-    public static void main(String args[]) {
-        AVLTree t = new AVLTree();
-        Node root = null;
-        while (true) {
-            System.out.println("(1) Insert");
-            System.out.println("(2) Delete");
+   // public static void main(String args[]) {
+     //   AVLTree t = new AVLTree();
+      //  Node root = null;
+       // while (true) {
+         //   System.out.println("(1) Insert");
+           // System.out.println("(2) Delete");
 
-            try {
-                BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-                String s = bufferRead.readLine();
+            //try {
+              //  BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+                //String s = bufferRead.readLine();
 
-                if (Integer.parseInt(s) == 1) {
-                    System.out.print("Value to be inserted: ");
-                    root = t.insert(root, Integer.parseInt(bufferRead.readLine()));
-                }
-                else if (Integer.parseInt(s) == 2) {
-                    System.out.print("Value to be deleted: ");
-                    root = t.deleteNode(root, Integer.parseInt(bufferRead.readLine()));
-                }
-                else {
-                    System.out.println("Invalid choice, try again!");
-                    continue;
-                }
+              //  if (Integer.parseInt(s) == 1) {
+                //    System.out.print("Value to be inserted: ");
+                  //  root = t.insert(root, Integer.parseInt(bufferRead.readLine()));
+                //}
+                //else if (Integer.parseInt(s) == 2) {
+                  //  System.out.print("Value to be deleted: ");
+                   // root = t.deleteNode(root, Integer.parseInt(bufferRead.readLine()));
+                //}
+                //else {
+                  //  System.out.println("Invalid choice, try again!");
+                   // continue;
+                //}
 
-                t.print(root);
-            }
-            catch(IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+                //t.print(root);
+            //}
+            //catch(IOException e) {
+              //  e.printStackTrace();
+            //}
+        //}
+    //}
 }

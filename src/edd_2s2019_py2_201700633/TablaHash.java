@@ -31,10 +31,10 @@ public class TablaHash {
     
     
     public TablaHash(){
-       this.tamanos = new int [] {23,29,37,43,47,53,59,67,73,79,83,89,97,103,107,113,127,137,149,157,167,179,197,211,227};
+       this.tamanos = new int [] {7,11,13,17,19,23,29,37,43,47,53,59,67,73,79,83,89,97,103,107,113,127,137,149,157,167,179,197,211,227};
        this.indiceTam = 0;
        this.ocupados =0;
-       this.factorUtil = 80.0f;
+       this.factorUtil = 75.0f;
        this.tamano = tamanos[indiceTam];
        this.vectorHash = new NodoHash[tamano];
        this.porcentajeUtil = calcularPorcentajeUtil();
@@ -94,7 +94,7 @@ public class TablaHash {
     }
     public void insertar(String nombreVar,String contra){
         boolean insertado = false;
-        if (porcentajeUtil<=80.00f) {
+        if (porcentajeUtil<=75.00f) {
             for (int i = 0; i < tamano; i++) {
                 int  posicion = DobleHashing(nombreVar,i);
                 if (posicion>tamano) {
