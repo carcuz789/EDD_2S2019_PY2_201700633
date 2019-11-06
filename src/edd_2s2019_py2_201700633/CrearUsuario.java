@@ -5,6 +5,7 @@
  */
 package edd_2s2019_py2_201700633;
 
+import java.io.File;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import javax.swing.JOptionPane;
@@ -15,6 +16,8 @@ import javax.swing.JOptionPane;
  */
 public class CrearUsuario extends javax.swing.JFrame {
    Inicio hola;
+    static String Rutax ="C:\\RAIZ\\";
+
     /**
      * Creates new form CrearUsuario
      */
@@ -144,6 +147,12 @@ public class CrearUsuario extends javax.swing.JFrame {
                  String Usuario = this.txt_Usuario.getText();
                  String Contraseña = getSHA256(this.txt_contraseña.getText());
                  hola.Tabla.insertar(Usuario, Contraseña);
+                  File folder = new File(this.Rutax+Usuario);
+          if (folder.exists()) {
+              JOptionPane.showMessageDialog(null,"YA EXISTE ESTE DIRECTORIO");
+        }else{
+              folder.mkdir();
+          }
         
             }else{
                  JOptionPane.showMessageDialog(null,"INGRESE UNA CONTRASEÑA VALIDA" );

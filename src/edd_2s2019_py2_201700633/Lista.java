@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package edd_2s2019_py2_201700633;
 
 /**
@@ -144,11 +140,7 @@ public class Lista {
             throw new Exception("Posicion inexistente en la lista.");
         }
     }
-    /**
-     * Busca si existe un valor en la lista.
-     * @param referencia valor a buscar.
-     * @return true si existe el valor en la lista.
-     */
+   
     public boolean buscar(String referencia){
         // Crea una copia de la lista.
         Nodo aux = inicio;
@@ -170,12 +162,7 @@ public class Lista {
         // Retorna el resultado de la bandera.
         return encontrado;
     }
-    /**
-     * Consulta la posición de un elemento en la lista
-     * @param referencia valor del nodo el cual se desea saber la posición.
-     * @return un valor entero entre [0,n] que indica la posición del nodo. 
-     * @throws Exception 
-     */
+   
     public int getPosicion(String referencia) throws Exception{
         // Consulta si el valor existe en la lista.
         if (buscar(referencia)) {

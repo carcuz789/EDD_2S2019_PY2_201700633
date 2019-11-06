@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author Rodrigo Carcuz
  */
 public class Inicio extends javax.swing.JFrame {
- TablaHash Tabla = new TablaHash();
+public static TablaHash Tabla = new TablaHash();
     /**
      * Creates new form Inicio
      */

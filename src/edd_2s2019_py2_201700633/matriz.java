@@ -18,10 +18,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Usuario
- */
+
 public  class matriz {
 
     public static List<String> contenido = new ArrayList<String>();

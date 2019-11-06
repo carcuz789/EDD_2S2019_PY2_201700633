@@ -16,10 +16,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- *
- * @author Usuario
- */
 public class lateral {
 
     public static nodo_lateral primero;
