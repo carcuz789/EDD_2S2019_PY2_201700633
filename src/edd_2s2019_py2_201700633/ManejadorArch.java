@@ -82,12 +82,32 @@ Inicio ini;
         jLabel2.setText("Carpetas");
 
         jb_crear.setText("Crear");
+        jb_crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_crearActionPerformed(evt);
+            }
+        });
 
         jb_modificar.setText("Modificar");
+        jb_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_modificarActionPerformed(evt);
+            }
+        });
 
         jb_eliminar.setText("Eliminar");
+        jb_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_eliminarActionPerformed(evt);
+            }
+        });
 
         jb_subir.setText("Subir");
+        jb_subir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_subirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -269,6 +289,51 @@ Inicio ini;
             }
         }
     }//GEN-LAST:event_jb_cargausuariosActionPerformed
+
+    private void jb_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_crearActionPerformed
+        // TODO add your handling code here:
+        String CarpetaCrear= JOptionPane.showInputDialog("INGRESE EL NOMBRE DE LA CARPETA");
+          File folder = new File(this.PathActual+ CarpetaCrear);
+          if (folder.exists()) {
+              JOptionPane.showMessageDialog(null,"YA EXISTE ESTE DIRECTORIO");
+        }else{
+              folder.mkdir();
+          }
+        
+        
+    }//GEN-LAST:event_jb_crearActionPerformed
+
+    private void jb_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modificarActionPerformed
+        // TODO add your handling code here:
+        String CarpetaMod = this.PathActual;
+        String CarpModif = JOptionPane.showInputDialog("INGRESE LA CARPETA A MODIFICAR");
+        String CarModif = JOptionPane.showInputDialog("INGRESE EL NUEVO NOMBRE DE LA CARPETA");
+        File oldFile = new File(CarpetaMod+CarpModif);
+        File newFile = new File(CarpetaMod+CarModif);
+        if (oldFile.renameTo(newFile)) {
+            JOptionPane.showMessageDialog(null, "CARPETA MODIFICADA EXITOSAMENTE");
+        }else{
+            JOptionPane.showMessageDialog(null, "ERROR EN MODIFICAR CARPETA ");
+        }
+    }//GEN-LAST:event_jb_modificarActionPerformed
+
+    private void jb_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_eliminarActionPerformed
+        // TODO add your handling code here:
+        String directorio = JOptionPane.showInputDialog("INGRESE LA CARPETA A ELIMINAR");
+        String rutcom = this.PathActual+directorio;
+        File rut = new File(rutcom);
+        if (rut.delete()) {
+            JOptionPane.showMessageDialog(null, "CARPETA ELIMINADA CORRECTAMENTE");
+        }else{
+            JOptionPane.showMessageDialog(null, "ERROR EN ELIMINAR CARPETA");
+        }
+    }//GEN-LAST:event_jb_eliminarActionPerformed
+
+    private void jb_subirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_subirActionPerformed
+        // TODO add your handling code here:
+        String Usu = JOptionPane.showInputDialog("INGRESE EL USUARIO PARA COMPARTIR LA CARPETA");
+        
+    }//GEN-LAST:event_jb_subirActionPerformed
  public static String getSHA256(String input){
 
 	String toReturn = null;
