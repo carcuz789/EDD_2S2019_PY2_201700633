@@ -11,6 +11,9 @@ import java.io.FileReader;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import javax.swing.JFileChooser;
+import java.io.*;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -18,12 +21,26 @@ import javax.swing.JFileChooser;
  */
 public class ManejadorArch extends javax.swing.JFrame {
 Inicio ini;
+ String Ruta ="C:\\RAIZ\\";
+ String NombreUs ="";
+ String PathActual="";
+ 
  
     /**
      * Creates new form ManejadorArch
      */
     public ManejadorArch(String Usuario) {
         initComponents();
+        NombreUs = Usuario;
+        PathActual = Ruta+Usuario+"\\";
+        //path actual para crear archivos y crear carpetas
+        
+        if (Usuario.equals("admin")) {
+            this.jFileChooser1.setCurrentDirectory(new java.io.File(Ruta));
+        }else{
+            this.jFileChooser1.setCurrentDirectory(new java.io.File(Ruta+Usuario));
+        }
+        
         if (Usuario.equals("admin")) {
             this.jb_cargausuarios.setVisible(true);
         }else{
@@ -199,7 +216,7 @@ Inicio ini;
     private void jb_cargausuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cargausuariosActionPerformed
         // TODO add your handling code here:
         String ruta="";
-        JFileChooser File = new JFileChooser();
+        JFileChooser File = new JFileChooser("C:\\Users\\Rodrigo Carcuz\\Desktop\\");
         int opcion = File.showOpenDialog(this);
         if (opcion==JFileChooser.APPROVE_OPTION) {
             String nombreArch = File.getSelectedFile().getPath();
@@ -291,5 +308,12 @@ Inicio ini;
 
     private void insertar(String nombre, String Contra) {
           ini.Tabla.insertar(nombre, Contra);
+          File folder = new File(this.Ruta+nombre);
+          if (folder.exists()) {
+              JOptionPane.showMessageDialog(null,"YA EXISTE ESTE DIRECTORIO");
+        }else{
+              folder.mkdir();
+          }
+          
         }
 }
