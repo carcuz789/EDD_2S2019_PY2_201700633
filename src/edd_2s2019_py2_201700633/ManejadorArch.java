@@ -32,7 +32,12 @@ Inicio ini;
     public ManejadorArch(String Usuario) {
         initComponents();
         NombreUs = Usuario;
-        PathActual = Ruta+Usuario+"\\";
+        
+        if (Usuario.equals("admin")) {
+            PathActual = Ruta+"\\";
+        }else{
+            PathActual = Ruta+Usuario+"\\";
+        }
         //path actual para crear archivos y crear carpetas
         
         if (Usuario.equals("admin")) {
@@ -145,6 +150,11 @@ Inicio ini;
         jLabel3.setText("Archivos");
 
         jb_crearArchivo.setText("Crear");
+        jb_crearArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_crearArchivoActionPerformed(evt);
+            }
+        });
 
         jb_modificarArchivos.setText("Modificar");
 
@@ -334,6 +344,38 @@ Inicio ini;
         String Usu = JOptionPane.showInputDialog("INGRESE EL USUARIO PARA COMPARTIR LA CARPETA");
         
     }//GEN-LAST:event_jb_subirActionPerformed
+
+    private void jb_crearArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_crearArchivoActionPerformed
+        // TODO add your handling code here:
+        String Arch = JOptionPane.showInputDialog("1.CARGA MASIVA \n 2.CARGA INDIVIDUAL");
+        switch(Arch){
+            case "1":
+                
+                break;
+            case "2":
+                String NombArch = JOptionPane.showInputDialog("INGRESE EL NOMBRE DE EL ARCHIVO");
+                String RutaARCHi = this.PathActual + NombArch;
+                try{
+                    File fi = new File(RutaARCHi);
+                    if (fi.exists()) {
+                        JOptionPane.showMessageDialog(null,"ARCHIVO YA EXISTE ");
+                    }else{
+                        fi.createNewFile();
+                    }
+                     FileWriter fw = new FileWriter(fi);
+                     String Cont = JOptionPane.showInputDialog("INGRESE EL CONTENIDO DEL ARCHIVO");
+                     BufferedWriter bw = new BufferedWriter(fw);
+                     bw.write(Cont);
+                     bw.close();
+                    
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null,"ERROR AL CREAR ARCHIVO ");
+                }
+                
+                break;
+        }
+        
+    }//GEN-LAST:event_jb_crearArchivoActionPerformed
  public static String getSHA256(String input){
 
 	String toReturn = null;
