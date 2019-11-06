@@ -8,6 +8,8 @@ package edd_2s2019_py2_201700633;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import javax.swing.JFileChooser;
 
 /**
@@ -15,7 +17,8 @@ import javax.swing.JFileChooser;
  * @author Rodrigo Carcuz
  */
 public class ManejadorArch extends javax.swing.JFrame {
-
+Inicio ini;
+ 
     /**
      * Creates new form ManejadorArch
      */
@@ -214,7 +217,18 @@ public class ManejadorArch extends javax.swing.JFrame {
            while(texto != null)
            {
                //Hacer lo que sea con la línea leída
-               System.out.println(texto);
+               
+               String[] Var=texto.split(",");        
+               String Contra= getSHA256(Var[1]);
+               String nombre=Var[0];
+               try{
+                   insertar(nombre,Contra);
+               }catch(Exception e){
+                 System.out.println("no insertado");
+               }
+               //insertar(nombre,Contra);
+               //crear una carpeta con cada nombre
+               
                //Leer la siguiente línea
                texto = br.readLine();
            }
@@ -238,7 +252,20 @@ public class ManejadorArch extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jb_cargausuariosActionPerformed
+ public static String getSHA256(String input){
 
+	String toReturn = null;
+	try {
+	    MessageDigest digest = MessageDigest.getInstance("SHA-256");
+	    digest.reset();
+	    digest.update(input.getBytes("utf8"));
+	    toReturn = String.format("%064x", new BigInteger(1, digest.digest()));
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	
+	return toReturn;
+    }
     /**
      * @param args the command line arguments
      */
@@ -261,4 +288,8 @@ public class ManejadorArch extends javax.swing.JFrame {
     private javax.swing.JButton jb_subir;
     private javax.swing.JButton jb_subirArchivo;
     // End of variables declaration//GEN-END:variables
+
+    private void insertar(String nombre, String Contra) {
+          ini.Tabla.insertar(nombre, Contra);
+        }
 }
