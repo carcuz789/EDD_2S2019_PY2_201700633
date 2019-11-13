@@ -5,6 +5,7 @@
  */
 package edd_2s2019_py2_201700633;
 
+import static edd_2s2019_py2_201700633.Inicio.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,10 +22,12 @@ import javax.swing.JOptionPane;
  */
 public class ManejadorArch extends javax.swing.JFrame {
 Inicio ini;
- String Ruta ="C:\\RAIZ\\";
+ String Ruta ="\\";
  String NombreUs ="";
- String PathActual="";
- 
+ String Rutax="";
+ String Rutay="";
+ int x=0;
+ int y=0;
  
     /**
      * Creates new form ManejadorArch
@@ -34,22 +37,26 @@ Inicio ini;
         NombreUs = Usuario;
         
         if (Usuario.equals("admin")) {
-            PathActual = Ruta+"\\";
+            Rutax = "\\";
+            Rutay =Ruta;
         }else{
-            PathActual = Ruta+Usuario+"\\";
+            Rutax = "\\";
+            Rutay =Ruta;
         }
         //path actual para crear archivos y crear carpetas
         
         if (Usuario.equals("admin")) {
-            this.jFileChooser1.setCurrentDirectory(new java.io.File(Ruta));
+          //  this.jFileChooser1.setCurrentDirectory(new java.io.File(Ruta));
         }else{
-            this.jFileChooser1.setCurrentDirectory(new java.io.File(Ruta+Usuario));
+          //  this.jFileChooser1.setCurrentDirectory(new java.io.File(Ruta+Usuario));
         }
         
         if (Usuario.equals("admin")) {
             this.jb_cargausuarios.setVisible(true);
+            this.jb_reporteusuarios.setVisible(true);
         }else{
             this.jb_cargausuarios.setVisible(false);
+            this.jb_reporteusuarios.setVisible(false);
         }
     }
 
@@ -76,7 +83,13 @@ Inicio ini;
         jb_eliminarArchivos = new javax.swing.JButton();
         jb_subirArchivo = new javax.swing.JButton();
         jb_cargausuarios = new javax.swing.JButton();
-        jFileChooser1 = new javax.swing.JFileChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jb_compartir = new javax.swing.JButton();
+        jb_reportesParalosUd = new javax.swing.JButton();
+        jb_abrircarpeta = new javax.swing.JButton();
+        jb_reporteusuarios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -200,7 +213,62 @@ Inicio ini;
             }
         });
 
-        jFileChooser1.setCurrentDirectory(new java.io.File("C:\\RAIZ"));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel3.setBackground(new java.awt.Color(0, 82, 255));
+
+        jb_compartir.setText("Compartir");
+
+        jb_reportesParalosUd.setText("Reportes");
+        jb_reportesParalosUd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_reportesParalosUdActionPerformed(evt);
+            }
+        });
+
+        jb_abrircarpeta.setText("Abrir Carpeta");
+        jb_abrircarpeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_abrircarpetaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jb_compartir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jb_reportesParalosUd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jb_abrircarpeta, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jb_compartir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jb_reportesParalosUd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jb_abrircarpeta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jb_reporteusuarios.setText("Reporte Usuarios");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -211,33 +279,38 @@ Inicio ini;
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jb_cargausuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jb_reporteusuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 823, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jb_cargausuarios))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_cargausuarios)
+                    .addComponent(jb_reporteusuarios))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 8, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
 
         pack();
@@ -265,9 +338,10 @@ Inicio ini;
            {
                //Hacer lo que sea con la línea leída
                
-               String[] Var=texto.split(",");        
-               String Contra= getSHA256(Var[1]);
-               String nombre=Var[0];
+                 String[] Var=texto.split(",");        
+                 String Contra= getSHA256(Var[1]);
+                 String nombre=Var[0];
+                 
                try{
                    insertar(nombre,Contra);
                }catch(Exception e){
@@ -302,41 +376,23 @@ Inicio ini;
 
     private void jb_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_crearActionPerformed
         // TODO add your handling code here:
-        String CarpetaCrear= JOptionPane.showInputDialog("INGRESE EL NOMBRE DE LA CARPETA");
-          File folder = new File(this.PathActual+ CarpetaCrear);
-          if (folder.exists()) {
-              JOptionPane.showMessageDialog(null,"YA EXISTE ESTE DIRECTORIO");
-        }else{
-              folder.mkdir();
-          }
-        
+         String Usu = JOptionPane.showInputDialog("INGRESE EL NOMBRE DE LA CARPETA");
+      this.Rutax=Usu;
+        AVLTree arbol = new AVLTree();
+      x++;
+      y++;
+      ini.ListaGen.push(x,y,Usu,this.NombreUs,Rutax,Rutay,arbol, "C");
         
     }//GEN-LAST:event_jb_crearActionPerformed
 
     private void jb_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modificarActionPerformed
         // TODO add your handling code here:
-        String CarpetaMod = this.PathActual;
-        String CarpModif = JOptionPane.showInputDialog("INGRESE LA CARPETA A MODIFICAR");
-        String CarModif = JOptionPane.showInputDialog("INGRESE EL NUEVO NOMBRE DE LA CARPETA");
-        File oldFile = new File(CarpetaMod+CarpModif);
-        File newFile = new File(CarpetaMod+CarModif);
-        if (oldFile.renameTo(newFile)) {
-            JOptionPane.showMessageDialog(null, "CARPETA MODIFICADA EXITOSAMENTE");
-        }else{
-            JOptionPane.showMessageDialog(null, "ERROR EN MODIFICAR CARPETA ");
-        }
+     
     }//GEN-LAST:event_jb_modificarActionPerformed
 
     private void jb_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_eliminarActionPerformed
         // TODO add your handling code here:
-        String directorio = JOptionPane.showInputDialog("INGRESE LA CARPETA A ELIMINAR");
-        String rutcom = this.PathActual+directorio;
-        File rut = new File(rutcom);
-        if (rut.delete()) {
-            JOptionPane.showMessageDialog(null, "CARPETA ELIMINADA CORRECTAMENTE");
-        }else{
-            JOptionPane.showMessageDialog(null, "ERROR EN ELIMINAR CARPETA");
-        }
+       
     }//GEN-LAST:event_jb_eliminarActionPerformed
 
     private void jb_subirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_subirActionPerformed
@@ -353,29 +409,29 @@ Inicio ini;
                 
                 break;
             case "2":
-                String NombArch = JOptionPane.showInputDialog("INGRESE EL NOMBRE DE EL ARCHIVO");
-                String RutaARCHi = this.PathActual + NombArch;
-                try{
-                    File fi = new File(RutaARCHi);
-                    if (fi.exists()) {
-                        JOptionPane.showMessageDialog(null,"ARCHIVO YA EXISTE ");
-                    }else{
-                        fi.createNewFile();
-                    }
-                     FileWriter fw = new FileWriter(fi);
-                     String Cont = JOptionPane.showInputDialog("INGRESE EL CONTENIDO DEL ARCHIVO");
-                     BufferedWriter bw = new BufferedWriter(fw);
-                     bw.write(Cont);
-                     bw.close();
-                    
-                }catch(Exception e){
-                    JOptionPane.showMessageDialog(null,"ERROR AL CREAR ARCHIVO ");
-                }
-                
+                 String NombreArch = JOptionPane.showInputDialog("INGRESE EL NOMBRE DEL ARCHIVO A CREAR");
+                 String CONTENIDO = JOptionPane.showInputDialog("INGRESE EL CONTENIDO");    
+                 Rutax=NombreArch;
+                 ini.ListaGen.push(x,y,NombreArch,this.NombreUs,Rutax,Rutay,null, CONTENIDO);
+                 
                 break;
         }
         
     }//GEN-LAST:event_jb_crearArchivoActionPerformed
+
+    private void jb_reportesParalosUdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_reportesParalosUdActionPerformed
+        // TODO add your handling code here:
+        ini.ListaGen.printlist(ListaGen.head);        
+    }//GEN-LAST:event_jb_reportesParalosUdActionPerformed
+
+    private void jb_abrircarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_abrircarpetaActionPerformed
+        // TODO add your handling code here
+        //editar ruta x y ruta y
+         String NombreArch = JOptionPane.showInputDialog("INGRESE LA CARPETA A IR");
+         Rutay=NombreArch;
+         
+        
+    }//GEN-LAST:event_jb_abrircarpetaActionPerformed
  public static String getSHA256(String input){
 
 	String toReturn = null;
@@ -396,31 +452,33 @@ Inicio ini;
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jb_abrircarpeta;
     private javax.swing.JButton jb_cargausuarios;
+    private javax.swing.JButton jb_compartir;
     private javax.swing.JButton jb_crear;
     private javax.swing.JButton jb_crearArchivo;
     private javax.swing.JButton jb_eliminar;
     private javax.swing.JButton jb_eliminarArchivos;
     private javax.swing.JButton jb_modificar;
     private javax.swing.JButton jb_modificarArchivos;
+    private javax.swing.JButton jb_reportesParalosUd;
+    private javax.swing.JButton jb_reporteusuarios;
     private javax.swing.JButton jb_subir;
     private javax.swing.JButton jb_subirArchivo;
     // End of variables declaration//GEN-END:variables
 
     private void insertar(String nombre, String Contra) {
           ini.Tabla.insertar(nombre, Contra);
-          File folder = new File(this.Ruta+nombre);
-          if (folder.exists()) {
-              JOptionPane.showMessageDialog(null,"YA EXISTE ESTE DIRECTORIO");
-        }else{
-              folder.mkdir();
-          }
+          AVLTree arbol = new AVLTree();
+          ini.ListaGen.append(0,0,"\\",nombre,"\\","\\",arbol,"C");        
           
         }
 }
