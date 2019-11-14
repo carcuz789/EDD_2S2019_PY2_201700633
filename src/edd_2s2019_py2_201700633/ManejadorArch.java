@@ -415,28 +415,44 @@ Inicio ini;
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("digraph g {");
-            bw.write("node[shape=ellipse]");
+            bw.write("rankdir=LR;");
+            bw.write("node[shape=record]");
+            
             //hacer nodos
             while(node!=null){
                 if (node.usuario.equals(NombreUs)) {
                     if (node.tipo.equals("C")) {
                                                
                         if (!node.rutay.equals(node.rutax)) {
-                            bw.write(node.nombredir+"C1 [label=\""+node.nombredir+"\"];");
-                            conexiones+=node.rutay+"C1 ->"+node.nombredir+"C1 ;\n" ;
+                            bw.write("H"+node.nombredir+"C1 [label=\""+node.nombredir+"\"];");
+                            if (node.rutay.equals("\\")) {
+                                conexiones+="HC1 ->"+"H"+node.nombredir+"C1 ;\n" ;
                               last = node; 
-                     node = node.next; 
+                              node = node.next;
+                            }
+                            else{
+                                conexiones+="H"+node.rutay+"C1 ->"+"H"+node.nombredir+"C1 ;\n" ;
+                              last = node; 
+                              node = node.next;
+                            } 
                         }else{
-                             bw.write(node.nombredir+"C1 [label=\""+node.nombredir+"\"];");
+                            if (!node.nombredir.equals("\\")) {
+                               bw.write("H"+node.nombredir+"C1 [label=\""+node.nombredir+"\"];");
                                last = node; 
                                node = node.next; 
+                            }else{
+                               bw.write("H"+"C1 [label=\""+"\\\\"+"\"];");
+                               last = node; 
+                               node = node.next; 
+                            }
+                            
                         }
                     }else{
                         last = node; 
-                     node = node.next; 
+                        node = node.next; 
                     }
                 }else{
-                    last = node; 
+                     last = node; 
                      node = node.next; 
                 }
             }
