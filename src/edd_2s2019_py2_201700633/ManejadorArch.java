@@ -404,6 +404,59 @@ Inicio ini;
     public void crearGrafo(){
          Node last=null;
          Node node =ListaGen.head;
+         String conexiones="";
+              try {
+            String ruta = "grafo.txt";
+            File file = new File(ruta);
+            // Si el archivo no existe es creado
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("digraph g {");
+            bw.write("node[shape=ellipse]");
+            //hacer nodos
+            while(node!=null){
+                if (node.usuario.equals(NombreUs)) {
+                    if (node.tipo.equals("C")) {
+                                               
+                        if (!node.rutay.equals(node.rutax)) {
+                            bw.write(node.nombredir+"C1 [label=\""+node.nombredir+"\"];");
+                            conexiones+=node.rutay+"->"+node.nombredir+";\n" ;
+                              last = node; 
+                     node = node.next; 
+                        }else{
+                             bw.write(node.nombredir+"C1 [label=\""+node.nombredir+"\"];");
+                               last = node; 
+                               node = node.next; 
+                        }
+                    }else{
+                        last = node; 
+                     node = node.next; 
+                    }
+                }else{
+                    last = node; 
+                     node = node.next; 
+                }
+            }
+            //conectar los nodos 
+            bw.write(conexiones);
+            bw.write("}");          
+           
+            bw.close();
+            try {
+    // Execute a command without arguments
+                    String command = "dot -Tjpg grafo.txt -o grafon.jpg";
+                     Process child = Runtime.getRuntime().exec(command);
+                     child = Runtime.getRuntime().exec(command);
+                } catch (Exception e) {
+                }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }    
     
     private void jb_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modificarActionPerformed
@@ -443,7 +496,7 @@ Inicio ini;
     private void jb_reportesParalosUdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_reportesParalosUdActionPerformed
         // TODO add your handling code here:
         ini.ListaGen.printlist(ListaGen.head);   
-       
+        crearGrafo();
     }//GEN-LAST:event_jb_reportesParalosUdActionPerformed
 
     private void jb_abrircarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_abrircarpetaActionPerformed
