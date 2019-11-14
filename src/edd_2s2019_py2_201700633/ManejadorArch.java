@@ -5,6 +5,7 @@
  */
 package edd_2s2019_py2_201700633;
 
+import edd_2s2019_py2_201700633.DLL.Node;
 import static edd_2s2019_py2_201700633.Inicio.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -14,6 +15,7 @@ import java.security.MessageDigest;
 import javax.swing.JFileChooser;
 import java.io.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.*;
 
 
 /**
@@ -28,14 +30,16 @@ Inicio ini;
  String Rutay="";
  int x=0;
  int y=0;
- 
+   
     /**
      * Creates new form ManejadorArch
      */
     public ManejadorArch(String Usuario) {
         initComponents();
+    
         NombreUs = Usuario;
         
+         //modelo.addRow();
         if (Usuario.equals("admin")) {
             Rutax = "\\";
             Rutay =Ruta;
@@ -215,15 +219,20 @@ Inicio ini;
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Tipo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel3.setBackground(new java.awt.Color(0, 82, 255));
@@ -269,6 +278,11 @@ Inicio ini;
         );
 
         jb_reporteusuarios.setText("Reporte Usuarios");
+        jb_reporteusuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_reporteusuariosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -382,9 +396,16 @@ Inicio ini;
       x++;
       y++;
       ini.ListaGen.push(x,y,Usu,this.NombreUs,Rutax,Rutay,arbol, "C");
-        
+       DefaultTableModel  modelo=(DefaultTableModel) this.jTable1.getModel();
+      modelo.addRow(new Object[]{Usu,"CARPETA"});
+     
+      
     }//GEN-LAST:event_jb_crearActionPerformed
-
+    public void crearGrafo(){
+         Node last=null;
+         Node node =ListaGen.head;
+    }    
+    
     private void jb_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modificarActionPerformed
         // TODO add your handling code here:
      
@@ -411,17 +432,18 @@ Inicio ini;
             case "2":
                  String NombreArch = JOptionPane.showInputDialog("INGRESE EL NOMBRE DEL ARCHIVO A CREAR");
                  String CONTENIDO = JOptionPane.showInputDialog("INGRESE EL CONTENIDO");    
-                 Rutax=NombreArch;
-                 ini.ListaGen.push(x,y,NombreArch,this.NombreUs,Rutax,Rutay,null, CONTENIDO);
-                 
+                 //Rutax=NombreArch;
+                 ini.ListaGen.push(x,y,NombreArch,this.NombreUs,Rutay,Rutay,null, CONTENIDO);
+                  DefaultTableModel  modelo=(DefaultTableModel) this.jTable1.getModel();
+                 modelo.addRow(new Object[]{NombreArch,"ARCHIVO"});
                 break;
-        }
-        
+        }        
     }//GEN-LAST:event_jb_crearArchivoActionPerformed
 
     private void jb_reportesParalosUdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_reportesParalosUdActionPerformed
         // TODO add your handling code here:
-        ini.ListaGen.printlist(ListaGen.head);        
+        ini.ListaGen.printlist(ListaGen.head);   
+       
     }//GEN-LAST:event_jb_reportesParalosUdActionPerformed
 
     private void jb_abrircarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_abrircarpetaActionPerformed
@@ -429,9 +451,48 @@ Inicio ini;
         //editar ruta x y ruta y
          String NombreArch = JOptionPane.showInputDialog("INGRESE LA CARPETA A IR");
          Rutay=NombreArch;
-         
+          DefaultTableModel  modelo=(DefaultTableModel) this.jTable1.getModel();
+         modelo.setRowCount(0);
+         Node last=null;
+         Node node =ListaGen.head;
+         while(node!=null){
+             if (node.usuario.equals(NombreUs)) {
+                 if (node.rutay.equals(NombreArch)) {
+                     if (!"C".equals(node.tipo)) {
+                        modelo.addRow(new Object[]{node.nombredir,"ARCHIVO"});
+                        last = node; 
+                        node = node.next; 
+                     }else{
+                          modelo.addRow(new Object[]{node.nombredir,"CARPETA"});
+                          last = node; 
+                          node = node.next; 
+                     }
+   
+             }else{
+                     last = node; 
+                     node = node.next; 
+                 }
+             }else{
+                 last = node; 
+                 node = node.next; 
+             }
+             
+         }
         
     }//GEN-LAST:event_jb_abrircarpetaActionPerformed
+
+    private void jb_reporteusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_reporteusuariosActionPerformed
+        // TODO add your handling code here:
+         ini.Tabla.Imprimir();
+         try {
+    // Execute a command without arguments
+                    String command = "C:\\Users\\Rodrigo Carcuz\\Desktop\\EDD_2S2019_PY2_201700633\\HashTable.jpg";
+                     Runtime.getRuntime().exec(command);
+                     
+                } catch (Exception e) {
+                     JOptionPane.showMessageDialog(null,"NO SE ENCONTRO LA IMAGEN" );
+                }
+    }//GEN-LAST:event_jb_reporteusuariosActionPerformed
  public static String getSHA256(String input){
 
 	String toReturn = null;

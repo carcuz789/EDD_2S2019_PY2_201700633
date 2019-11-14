@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class Inicio extends javax.swing.JFrame {
 public static TablaHash Tabla = new TablaHash();
+public static DLL ListaGen= new DLL();
+
     /**
      * Creates new form Inicio
      */
@@ -23,6 +25,11 @@ public static TablaHash Tabla = new TablaHash();
         initComponents();
         String Contraseña = getSHA256("admin");
         Tabla.insertar("admin",Contraseña );
+        AVLTree arbol = new AVLTree();
+        ListaGen.push(0,0,"\\","admin","\\","\\",arbol,"C");
+        //ListaGen.printlist(ListaGen.head);
+        //AVLTree arbol=new AVLTree();
+        //ListaGen.InsertarFinal(ListaGen,0,0, "/", "admin", "/", "/",arbol ,"C" );
     }
 
     /**

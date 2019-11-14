@@ -147,12 +147,8 @@ public class CrearUsuario extends javax.swing.JFrame {
                  String Usuario = this.txt_Usuario.getText();
                  String Contraseña = getSHA256(this.txt_contraseña.getText());
                  hola.Tabla.insertar(Usuario, Contraseña);
-                  File folder = new File(this.Rutax+Usuario);
-          if (folder.exists()) {
-              JOptionPane.showMessageDialog(null,"YA EXISTE ESTE DIRECTORIO");
-        }else{
-              folder.mkdir();
-          }
+                 AVLTree arbol = new AVLTree();
+                 hola.ListaGen.append(0,0,"\\",Usuario,"\\","\\",arbol,"C");                 
         
             }else{
                  JOptionPane.showMessageDialog(null,"INGRESE UNA CONTRASEÑA VALIDA" );
