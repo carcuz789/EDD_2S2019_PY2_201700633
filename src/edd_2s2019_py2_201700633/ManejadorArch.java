@@ -391,14 +391,13 @@ Inicio ini;
     private void jb_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_crearActionPerformed
         // TODO add your handling code here:
          String Usu = JOptionPane.showInputDialog("INGRESE EL NOMBRE DE LA CARPETA");
-      this.Rutax=Usu;
-        AVLTree arbol = new AVLTree();
-      x++;
-      y++;
-      ini.ListaGen.push(x,y,Usu,this.NombreUs,Rutax,Rutay,arbol, "C");
-       DefaultTableModel  modelo=(DefaultTableModel) this.jTable1.getModel();
-      modelo.addRow(new Object[]{Usu,"CARPETA"});
-     
+         this.Rutax=Usu;
+         AVLTree arbol = new AVLTree();
+         x++;
+         y++;
+         ini.ListaGen.push(x,y,Usu,this.NombreUs,Rutax,Rutay,arbol, "C");
+         DefaultTableModel  modelo=(DefaultTableModel) this.jTable1.getModel();
+         modelo.addRow(new Object[]{Usu,"CARPETA"});    
       
     }//GEN-LAST:event_jb_crearActionPerformed
     public void crearGrafo(){
@@ -520,15 +519,12 @@ Inicio ini;
                  String contenido= getSHA256(Var[1]);
                  String nombre=Var[0];
                  
-               try{
-                   ini.ListaGen.push(x,y,nombre,this.NombreUs,Rutay,Rutay,null,contenido);
+               try{                   
+                   ini.ListaGen.push(x,y,nombre,this.NombreUs,Rutay,Rutay,null,contenido);                   
                }catch(Exception e){
                  System.out.println("no insertado");
                }
-               //insertar(nombre,Contra);
-               //crear una carpeta con cada nombre
-               
-               //Leer la siguiente línea
+              
                texto = br.readLine();
            }
         }
