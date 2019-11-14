@@ -423,7 +423,7 @@ Inicio ini;
                                                
                         if (!node.rutay.equals(node.rutax)) {
                             bw.write(node.nombredir+"C1 [label=\""+node.nombredir+"\"];");
-                            conexiones+=node.rutay+"->"+node.nombredir+";\n" ;
+                            conexiones+=node.rutay+"C1 ->"+node.nombredir+"C1 ;\n" ;
                               last = node; 
                      node = node.next; 
                         }else{
