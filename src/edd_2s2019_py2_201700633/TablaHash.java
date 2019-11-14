@@ -187,20 +187,21 @@ public class TablaHash {
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("digraph g {");
+            bw.write("node[shape=record]");
             String conexiones="";
                     for (int i = 0; i < tamano; i++) {
                          int k = i+1;
                         if (vectorHash[i]!=null) {
                            String us= vectorHash[i].usuario;
                            String contra = vectorHash[i].contraseña;
-                           bw.write(i+"[label=\"<f0> "+i+" |<f1> Usuario ="+us+" contraseña = "+contra+" \"];");
+                           bw.write(i+" [label=\"{<f0> "+i+" |<f1> Usuario -"+us+" |<f2> contraseña - "+contra+" }\"];");
                           
                            if (i<tamano-1) {
                             
                             conexiones+=i+"->"+k+";\n";
                         } 
                         }else{
-                              bw.write(i+"[label=\"<f0> "+i+" |<f1> Usuario = contraseña =  \"];");
+                               bw.write(i+" [label=\"{<f0> "+i+" |<f1> Usuario -"+"vacio"+" |<f2> contraseña - "+"vacio"+" }\"];");                          
                               conexiones+=i+"->"+k+";\n";
                         }                     
                        
@@ -217,8 +218,10 @@ public class TablaHash {
                 } catch (Exception e) {
                 }
             
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
+                
     }
 }
