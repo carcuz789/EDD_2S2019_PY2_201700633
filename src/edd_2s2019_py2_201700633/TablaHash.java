@@ -186,16 +186,37 @@ public class TablaHash {
             }
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("digraph g ");
-            bw.write(" subgraph cluster_0 {");
-                    for (int i = 0; i < tamano-1; i++) {
-                        int k=i+1;
-                        bw.write(i+"->"+k+";");
+            bw.write("digraph g {");
+            String conexiones="";
+                    for (int i = 0; i < tamano; i++) {
+                         int k = i+1;
+                        if (vectorHash[i]!=null) {
+                           String us= vectorHash[i].usuario;
+                           String contra = vectorHash[i].contraseña;
+                           bw.write(i+"[label=\"<f0> "+i+" |<f1> Usuario ="+us+" contraseña = "+contra+" \"];");
+                          
+                           if (i<tamano-1) {
+                            
+                            conexiones+=i+"->"+k+";\n";
+                        } 
+                        }else{
+                              bw.write(i+"[label=\"<f0> "+i+" |<f1> Usuario = contraseña =  \"];");
+                              conexiones+=i+"->"+k+";\n";
+                        }                     
+                       
                     }
-            bw.write("}");
-            
-            bw.write("}");
+            bw.write(conexiones);
+            bw.write("}");          
+           
             bw.close();
+            try {
+    // Execute a command without arguments
+                    String command = "dot -Tjpg tablahash.txt -o HashTable.jpg";
+                     Process child = Runtime.getRuntime().exec(command);
+                     child = Runtime.getRuntime().exec(command);
+                } catch (Exception e) {
+                }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
