@@ -98,8 +98,10 @@ public class pila {
             bw.write("node[shape=record]");
             String conexiones="";
             StackNode temp = root; 
+            int i=0;
                     while(temp!=null) {
-                                   
+                     bw.write(i+" [label=\"{<f0> "+i+" |<f1> Usuario -"+"vacio"+" |<f2> contraseña - "+"vacio"+" }\"];");                          
+                       i++;        
                        temp=temp.next;
                     }
             bw.write(conexiones);
