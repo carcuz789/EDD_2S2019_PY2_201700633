@@ -1,0 +1,5 @@
+digraph g {rankdir=LR;node[shape=record]HcapetachileC1 [label="capetachile"];Hcarpeta8C1 [label="carpeta8"];Hcarpeta2C1 [label="carpeta2"];Hcarpeta1C1 [label="carpeta1"];HC1 [label="\\"];Hcarpeta2C1 ->HcapetachileC1 ;
+Hcarpeta1C1 ->Hcarpeta8C1 ;
+HC1 ->Hcarpeta2C1 ;
+HC1 ->Hcarpeta1C1 ;
+}

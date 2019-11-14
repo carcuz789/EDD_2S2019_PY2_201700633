@@ -136,5 +136,41 @@ public class DLL {
 //            last = last.prev; 
 //        } 
     } 
+    public  boolean Existe(Node node,String usuario,String nombrearch){
+         Node last = null;
+         int estado=0;
+          while (node != null) { 
+              if (node.usuario.equals(usuario)) {
+                  if (node.nombredir.equals(nombrearch)) {
+                      estado=1;
+                  }
+              }
+            last = node; 
+            node = node.next; 
+        }
+          if (estado==0) {
+            return false;
+        }else{
+              return true;
+          }
+    }
+    public String Contenido(Node node,String usuario,String nombrearch){
+         Node last = null;
+         int estado=0;
+          while (node != null) { 
+              if (node.usuario.equals(usuario)) {
+                  if (node.nombredir.equals(nombrearch)) {
+                      estado=1;
+                  }
+              }
+            last = node; 
+            node = node.next; 
+        }
+          if (estado==0) {
+            return "false";
+        }else{
+              return node.tipo;
+          }
+    }
 }
   

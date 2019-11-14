@@ -100,7 +100,7 @@ public class pila {
             StackNode temp = root; 
                     while(temp!=null) {
                                    
-                       
+                       temp=temp.next;
                     }
             bw.write(conexiones);
             bw.write("}");          

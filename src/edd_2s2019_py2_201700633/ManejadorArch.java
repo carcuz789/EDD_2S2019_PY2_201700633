@@ -238,6 +238,11 @@ Inicio ini;
         jPanel3.setBackground(new java.awt.Color(0, 82, 255));
 
         jb_compartir.setText("Compartir");
+        jb_compartir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_compartirActionPerformed(evt);
+            }
+        });
 
         jb_reportesParalosUd.setText("Reportes");
         jb_reportesParalosUd.addActionListener(new java.awt.event.ActionListener() {
@@ -395,9 +400,15 @@ Inicio ini;
          AVLTree arbol = new AVLTree();
          x++;
          y++;
+         
+         if (ini.ListaGen.Existe(ListaGen.head,NombreUs,Usu)== false) {
+         
          ini.ListaGen.push(x,y,Usu,this.NombreUs,Rutax,Rutay,arbol, "C");
          DefaultTableModel  modelo=(DefaultTableModel) this.jTable1.getModel();
-         modelo.addRow(new Object[]{Usu,"CARPETA"});    
+         modelo.addRow(new Object[]{Usu,"CARPETA"});       
+        }else{
+               JOptionPane.showMessageDialog(null,"!CARPETA EXISTENTE¡");
+         }
       
     }//GEN-LAST:event_jb_crearActionPerformed
     public void crearGrafo(){
@@ -518,12 +529,16 @@ Inicio ini;
                  String[] Var=texto.split(",");        
                  String contenido= getSHA256(Var[1]);
                  String nombre=Var[0];
-                 
+                 if (ini.ListaGen.Existe(ListaGen.head,NombreUs,nombre)== false) {
+                
                try{                   
                    ini.ListaGen.push(x,y,nombre,this.NombreUs,Rutay,Rutay,null,contenido);                   
                }catch(Exception e){
                  System.out.println("no insertado");
-               }
+               }   
+               }else{
+                      JOptionPane.showMessageDialog(null,"!ARCHIVO EXISTENTE¡");
+                 }
               
                texto = br.readLine();
            }
@@ -551,9 +566,14 @@ Inicio ini;
                  String NombreArch = JOptionPane.showInputDialog("INGRESE EL NOMBRE DEL ARCHIVO A CREAR");
                  String CONTENIDO = JOptionPane.showInputDialog("INGRESE EL CONTENIDO");    
                  //Rutax=NombreArch;
+                    if (ini.ListaGen.Existe(ListaGen.head,NombreUs,NombreArch)== false) {
+                        
                  ini.ListaGen.push(x,y,NombreArch,this.NombreUs,Rutay,Rutay,null, CONTENIDO);
                   DefaultTableModel  modelo=(DefaultTableModel) this.jTable1.getModel();
                  modelo.addRow(new Object[]{NombreArch,"ARCHIVO"});
+                }else{                        
+                      JOptionPane.showMessageDialog(null,"!ARCHIVO EXISTENTE¡");
+                    }
                 break;
         }        
     }//GEN-LAST:event_jb_crearArchivoActionPerformed
@@ -611,6 +631,19 @@ Inicio ini;
                      JOptionPane.showMessageDialog(null,"NO SE ENCONTRO LA IMAGEN" );
                 }
     }//GEN-LAST:event_jb_reporteusuariosActionPerformed
+
+    private void jb_compartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_compartirActionPerformed
+        // TODO add your handling code here:
+         String us = JOptionPane.showInputDialog("INGRESE EL USUARIO A COMPARTIR");
+         String arch=JOptionPane.showInputDialog("INGRESE EL NOMBRE ARCHIVO A COMPARTIR");
+         String contenido =ini.ListaGen.Contenido(ListaGen.head,NombreUs,arch);
+         if (ini.ListaGen.Existe(ListaGen.head,NombreUs,arch)== true) {
+              ListaGen.push(x,y,arch,us,"\\","\\",null,contenido);
+        }else{
+               JOptionPane.showMessageDialog(null,"ARCHIVO NO EXISTE" );
+         }
+        
+    }//GEN-LAST:event_jb_compartirActionPerformed
  public static String getSHA256(String input){
 
 	String toReturn = null;
