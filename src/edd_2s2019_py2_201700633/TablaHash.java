@@ -5,6 +5,9 @@
  */
 package edd_2s2019_py2_201700633;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import javax.swing.JOptionPane;
 
 /**
@@ -172,5 +175,29 @@ public class TablaHash {
             JOptionPane.showMessageDialog(null,"USUARIO NO ENCONTRADO" );
         }
         return Contraseña;
+    }
+    public void Imprimir(){
+                try {
+            String ruta = "tablahash.txt";
+            File file = new File(ruta);
+            // Si el archivo no existe es creado
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("digraph g ");
+            bw.write(" subgraph cluster_0 {");
+                    for (int i = 0; i < tamano-1; i++) {
+                        int k=i+1;
+                        bw.write(i+"->"+k+";");
+                    }
+            bw.write("}");
+            
+            bw.write("}");
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
