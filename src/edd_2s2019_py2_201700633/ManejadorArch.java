@@ -496,7 +496,60 @@ Inicio ini;
         String Arch = JOptionPane.showInputDialog("1.CARGA MASIVA \n 2.CARGA INDIVIDUAL");
         switch(Arch){
             case "1":
-                
+                    String ruta="";
+        JFileChooser File = new JFileChooser("C:\\Users\\Rodrigo Carcuz\\Desktop\\");
+        int opcion = File.showOpenDialog(this);
+        if (opcion==JFileChooser.APPROVE_OPTION) {
+            String nombreArch = File.getSelectedFile().getPath();
+            ruta = File.getSelectedFile().toString();
+            
+        }
+         BufferedReader br = null;
+        try {
+           //Crear un objeto BufferedReader al que se le pasa 
+           //   un objeto FileReader con el nombre del fichero
+           br = new BufferedReader(new FileReader(ruta));
+           //Leer la primera línea, guardando en un String
+           String texto = br.readLine();
+           //Repetir mientras no se llegue al final del fichero
+           while(texto != null)
+           {
+               //Hacer lo que sea con la línea leída
+               
+                 String[] Var=texto.split(",");        
+                 String contenido= getSHA256(Var[1]);
+                 String nombre=Var[0];
+                 
+               try{
+                   ini.ListaGen.push(x,y,nombre,this.NombreUs,Rutay,Rutay,null,contenido);
+               }catch(Exception e){
+                 System.out.println("no insertado");
+               }
+               //insertar(nombre,Contra);
+               //crear una carpeta con cada nombre
+               
+               //Leer la siguiente línea
+               texto = br.readLine();
+           }
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("Error: Fichero no encontrado");
+            System.out.println(e.getMessage());
+        }
+        catch(Exception e) {
+            System.out.println("Error de lectura del fichero");
+            System.out.println(e.getMessage());
+        }
+        finally {
+            try {
+                if(br != null)
+                    br.close();
+            }
+            catch (Exception e) {
+                System.out.println("Error al cerrar el fichero");
+                System.out.println(e.getMessage());
+            }
+        }
                 break;
             case "2":
                  String NombreArch = JOptionPane.showInputDialog("INGRESE EL NOMBRE DEL ARCHIVO A CREAR");
