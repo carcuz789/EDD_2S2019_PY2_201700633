@@ -79,13 +79,12 @@ Inicio ini;
         jb_crear = new javax.swing.JButton();
         jb_modificar = new javax.swing.JButton();
         jb_eliminar = new javax.swing.JButton();
-        jb_subir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jb_crearArchivo = new javax.swing.JButton();
         jb_modificarArchivos = new javax.swing.JButton();
         jb_eliminarArchivos = new javax.swing.JButton();
-        jb_subirArchivo = new javax.swing.JButton();
+        jb_Descargar = new javax.swing.JButton();
         jb_cargausuarios = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -124,13 +123,6 @@ Inicio ini;
             }
         });
 
-        jb_subir.setText("Subir");
-        jb_subir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_subirActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -143,8 +135,7 @@ Inicio ini;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jb_crear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jb_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(jb_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_subir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jb_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -157,9 +148,7 @@ Inicio ini;
                 .addComponent(jb_modificar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jb_eliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jb_subir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(java.awt.SystemColor.activeCaption);
@@ -177,7 +166,7 @@ Inicio ini;
 
         jb_eliminarArchivos.setText("Eliminar");
 
-        jb_subirArchivo.setText("Subir");
+        jb_Descargar.setText("Descargar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -192,7 +181,7 @@ Inicio ini;
                     .addComponent(jb_crearArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jb_modificarArchivos, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                     .addComponent(jb_eliminarArchivos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_subirArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jb_Descargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -206,7 +195,7 @@ Inicio ini;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jb_eliminarArchivos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jb_subirArchivo)
+                .addComponent(jb_Descargar)
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
@@ -327,8 +316,8 @@ Inicio ini;
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 8, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -494,12 +483,6 @@ Inicio ini;
         // TODO add your handling code here:
        
     }//GEN-LAST:event_jb_eliminarActionPerformed
-
-    private void jb_subirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_subirActionPerformed
-        // TODO add your handling code here:
-        String Usu = JOptionPane.showInputDialog("INGRESE EL USUARIO PARA COMPARTIR LA CARPETA");
-        
-    }//GEN-LAST:event_jb_subirActionPerformed
 
     private void jb_crearArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_crearArchivoActionPerformed
         // TODO add your handling code here:
@@ -672,6 +655,7 @@ Inicio ini;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jb_Descargar;
     private javax.swing.JButton jb_abrircarpeta;
     private javax.swing.JButton jb_cargausuarios;
     private javax.swing.JButton jb_compartir;
@@ -683,8 +667,6 @@ Inicio ini;
     private javax.swing.JButton jb_modificarArchivos;
     private javax.swing.JButton jb_reportesParalosUd;
     private javax.swing.JButton jb_reporteusuarios;
-    private javax.swing.JButton jb_subir;
-    private javax.swing.JButton jb_subirArchivo;
     // End of variables declaration//GEN-END:variables
 
     private void insertar(String nombre, String Contra) {
