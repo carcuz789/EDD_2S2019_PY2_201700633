@@ -5,6 +5,7 @@
  */
 package edd_2s2019_py2_201700633;
 
+import edd_2s2019_py2_201700633.AVLTree.Nod;
 import edd_2s2019_py2_201700633.DLL.Node;
 import static edd_2s2019_py2_201700633.Inicio.*;
 import java.io.BufferedReader;
@@ -14,6 +15,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import javax.swing.JFileChooser;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.*;
 
@@ -24,6 +27,7 @@ import javax.swing.table.*;
  */
 public class ManejadorArch extends javax.swing.JFrame {
 Inicio ini;
+ String ArchivoActual="\\";
  String Ruta ="\\";
  String NombreUs ="";
  String Rutax="";
@@ -92,6 +96,7 @@ Inicio ini;
         jb_compartir = new javax.swing.JButton();
         jb_reportesParalosUd = new javax.swing.JButton();
         jb_abrircarpeta = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jb_reporteusuarios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -163,6 +168,11 @@ Inicio ini;
         });
 
         jb_modificarArchivos.setText("Modificar");
+        jb_modificarArchivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_modificarArchivosActionPerformed(evt);
+            }
+        });
 
         jb_eliminarArchivos.setText("Eliminar");
 
@@ -247,6 +257,13 @@ Inicio ini;
             }
         });
 
+        jButton1.setText("Download");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -256,7 +273,8 @@ Inicio ini;
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jb_compartir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jb_reportesParalosUd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_abrircarpeta, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                    .addComponent(jb_abrircarpeta, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -268,6 +286,8 @@ Inicio ini;
                 .addComponent(jb_reportesParalosUd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jb_abrircarpeta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -315,8 +335,7 @@ Inicio ini;
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -387,12 +406,13 @@ Inicio ini;
          String Usu = JOptionPane.showInputDialog("INGRESE EL NOMBRE DE LA CARPETA");
          this.Rutax=Usu;
          AVLTree arbol = new AVLTree();
+         Nod nodo = null;
          x++;
          y++;
          
          if (ini.ListaGen.Existe(ListaGen.head,NombreUs,Usu)== false) {
          
-         ini.ListaGen.push(x,y,Usu,this.NombreUs,Rutax,Rutay,arbol, "C");
+         ini.ListaGen.push(x,y,Usu,this.NombreUs,Rutax,Rutay,arbol, "C",nodo);
          DefaultTableModel  modelo=(DefaultTableModel) this.jTable1.getModel();
          modelo.addRow(new Object[]{Usu,"CARPETA"});       
         }else{
@@ -476,7 +496,9 @@ Inicio ini;
     
     private void jb_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modificarActionPerformed
         // TODO add your handling code here:
-     
+         String Arch = JOptionPane.showInputDialog("INGRESE LA CARPETA A MODIFICAR");
+         String NEWArch = JOptionPane.showInputDialog("INGRESE EL NUEVO NOMBRE DE LA CARPETA");
+         ini.ListaGen.modificarCAR(ListaGen.head, NombreUs, Arch, NEWArch);
     }//GEN-LAST:event_jb_modificarActionPerformed
 
     private void jb_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_eliminarActionPerformed
@@ -514,8 +536,16 @@ Inicio ini;
                  String nombre=Var[0];
                  if (ini.ListaGen.Existe(ListaGen.head,NombreUs,nombre)== false) {
                 
-               try{                   
-                   ini.ListaGen.push(x,y,nombre,this.NombreUs,Rutay,Rutay,null,contenido);                   
+               try{      
+                    if (ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual)!=null) {
+                              Node nodo =ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual);
+                              Nod rooti =nodo.Nodoarbol;
+                              int valor = GenerarClave(nombre);
+                              rooti=nodo.arbol.insert(rooti, valor, nombre, contenido);
+                        }else{
+                            JOptionPane.showMessageDialog(null,"ARBLO AVL NO ENCONTRADO" );
+                    }
+                   ini.ListaGen.push(x,y,nombre,this.NombreUs,Rutay,Rutay,null,contenido,null);                   
                }catch(Exception e){
                  System.out.println("no insertado");
                }   
@@ -549,9 +579,17 @@ Inicio ini;
                  String NombreArch = JOptionPane.showInputDialog("INGRESE EL NOMBRE DEL ARCHIVO A CREAR");
                  String CONTENIDO = JOptionPane.showInputDialog("INGRESE EL CONTENIDO");    
                  //Rutax=NombreArch;
-                    if (ini.ListaGen.Existe(ListaGen.head,NombreUs,NombreArch)== false) {
-                        
-                 ini.ListaGen.push(x,y,NombreArch,this.NombreUs,Rutay,Rutay,null, CONTENIDO);
+                if (ini.ListaGen.Existe(ListaGen.head,NombreUs,NombreArch)== false) {
+                    //buscar el arbol e ingressar
+                        if (ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual)!=null) {
+                              Node nodo =ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual);
+                              Nod rooti =nodo.Nodoarbol;
+                              int valor = GenerarClave(NombreArch);
+                              rooti=nodo.arbol.insert(rooti, valor, NombreArch, CONTENIDO);
+                        }else{
+                            JOptionPane.showMessageDialog(null,"ARBLO AVL NO ENCONTRADO" );
+                    }
+                 ini.ListaGen.push(x,y,NombreArch,this.NombreUs,Rutay,Rutay,null, CONTENIDO,null);
                   DefaultTableModel  modelo=(DefaultTableModel) this.jTable1.getModel();
                  modelo.addRow(new Object[]{NombreArch,"ARCHIVO"});
                 }else{                        
@@ -565,6 +603,7 @@ Inicio ini;
         // TODO add your handling code here:
         ini.ListaGen.printlist(ListaGen.head);   
         crearGrafo();
+        ARBOLIN();
     }//GEN-LAST:event_jb_reportesParalosUdActionPerformed
 
     private void jb_abrircarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_abrircarpetaActionPerformed
@@ -572,6 +611,7 @@ Inicio ini;
         //editar ruta x y ruta y
          String NombreArch = JOptionPane.showInputDialog("INGRESE LA CARPETA A IR");
          Rutay=NombreArch;
+         ArchivoActual=NombreArch;
           DefaultTableModel  modelo=(DefaultTableModel) this.jTable1.getModel();
          modelo.setRowCount(0);
          Node last=null;
@@ -579,10 +619,16 @@ Inicio ini;
          while(node!=null){
              if (node.usuario.equals(NombreUs)) {
                  if (node.rutay.equals(NombreArch)) {
+                     
                      if (!"C".equals(node.tipo)) {
-                        modelo.addRow(new Object[]{node.nombredir,"ARCHIVO"});
-                        last = node; 
+                         if (node.nombredir.equals("\\")) {
+                             last = node; 
                         node = node.next; 
+                         }else{
+                              modelo.addRow(new Object[]{node.nombredir,"ARCHIVO"});
+                              last = node; 
+                              node = node.next; 
+                         }                       
                      }else{
                           modelo.addRow(new Object[]{node.nombredir,"CARPETA"});
                           last = node; 
@@ -601,7 +647,17 @@ Inicio ini;
          }
         
     }//GEN-LAST:event_jb_abrircarpetaActionPerformed
-
+    public void ARBOLIN(){
+        if (ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual)!=null) {
+            Node aux = ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual);
+            AVLTree arb = aux.arbol;
+            Nod nodo=aux.Nodoarbol;
+            arb.print(nodo);
+        }else{
+              JOptionPane.showMessageDialog(null,"ARBLO AVL NO ENCONTRADO" );
+        }
+        
+    }
     private void jb_reporteusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_reporteusuariosActionPerformed
         // TODO add your handling code here:
          ini.Tabla.Imprimir();
@@ -621,12 +677,29 @@ Inicio ini;
          String arch=JOptionPane.showInputDialog("INGRESE EL NOMBRE ARCHIVO A COMPARTIR");
          String contenido =ini.ListaGen.Contenido(ListaGen.head,NombreUs,arch);
          if (ini.ListaGen.Existe(ListaGen.head,NombreUs,arch)== true) {
-              ListaGen.push(x,y,arch,us,"\\","\\",null,contenido);
+              ListaGen.push(x,y,arch,us,"\\","\\",null,contenido,null);
         }else{
                JOptionPane.showMessageDialog(null,"ARCHIVO NO EXISTE" );
          }
         
     }//GEN-LAST:event_jb_compartirActionPerformed
+
+    private void jb_modificarArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modificarArchivosActionPerformed
+        // TODO add your handling code here:
+        String Arch = JOptionPane.showInputDialog("INGRESE EL ARCHIVO A MODIFICAR");
+         String NEWArch = JOptionPane.showInputDialog("INGRESE EL NUEVO NOMBRE DEL ARCHIVO");
+         ini.ListaGen.modificarCAR(ListaGen.head, NombreUs, Arch, NEWArch);
+    }//GEN-LAST:event_jb_modificarArchivosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         String DES = JOptionPane.showInputDialog("INGRESE EL NOMBRE DEL ARCHIVO A DESCARGAR");
+    try {
+        ini.ListaGen.descargar(ListaGen.head, NombreUs, DES);
+    } catch (IOException ex) {
+        JOptionPane.showMessageDialog(null,"ARCHIVO NO ENCONTRADO");
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
  public static String getSHA256(String input){
 
 	String toReturn = null;
@@ -647,6 +720,7 @@ Inicio ini;
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -672,7 +746,48 @@ Inicio ini;
     private void insertar(String nombre, String Contra) {
           ini.Tabla.insertar(nombre, Contra);
           AVLTree arbol = new AVLTree();
-          ini.ListaGen.append(0,0,"\\",nombre,"\\","\\",arbol,"C");        
+          Nod nodo=null;
+          ini.ListaGen.append(0,0,"\\",nombre,"\\","\\",arbol,"C",nodo);        
           
         }
+     private int GenerarClave(String id){
+        String codigo = "";
+        int tmp =0;
+        for (int i = 0; i < id.length(); i++) {
+            codigo += id.codePointAt(i);
+        }
+        if(codigo.length()>9){
+            return reduccion(codigo);
+        } else{
+            return Integer.parseInt(codigo);
+        }
+    }
+    private int reduccion(String codigo){
+        int tmp=0;
+        while(codigo.length()>9){
+            String aux="";
+            for (int i = 0; i < codigo.length()/2; i++) {
+                aux += codigo.charAt(i);
+            }
+            if (aux.length()>9) {
+                tmp=reduccion(aux);
+                aux="";
+            }else{
+                tmp = Integer.parseInt(aux);
+                aux="";
+            }
+            for (int i = codigo.length()/2; i < codigo.length(); i++) {
+                aux += codigo.charAt(i);
+            }
+            if (aux.length()>9) {
+                tmp = reduccion(aux);
+                aux ="";
+            }else{
+                tmp= Integer.parseInt(aux);
+                aux= "";
+            }
+            codigo=tmp+"";
+        }
+        return tmp;
+    }
 }
