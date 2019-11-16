@@ -675,18 +675,20 @@ int ver=0;
             bw.write("subgraph cluster1 {");
             bw.write("  rank=same;");
             int i=0;
-            bw.write("NC[label=\"\\\\\"];");
+            bw.write("NC[label=\"(*)\"];");
             String conc="NC->";
              do {
                  if (!vertical[i].equals("\\")) {
                     bw.write("y"+vertical[i]+"[label=\""+vertical[i]+"\"];");
+                 }else{
+                     bw.write("y"+"[label=\""+vertical[i]+vertical[i]+"\"];");
                  }               
              
                  if (vertical[i+1]!=null) {
                      if (!vertical[i].equals("\\")) {
                      conc+="y"+vertical[i]+"->";
                  }else{
-                    
+                     conc+="y"+"->";
                  } 
                      
                  }else{
@@ -702,13 +704,15 @@ int ver=0;
              do {
                  if (!vertical[i].equals("\\")) {
                     bw.write("x"+vertical[i]+"[label=\""+vertical[i]+"\"];");
+                 }else{
+                     bw.write("x"+"[label=\""+vertical[i]+vertical[i]+"\"];");
                  }               
              
                  if (vertical[i+1]!=null) {
                      if (!vertical[i].equals("\\")) {
                      conc2+="x"+vertical[i]+"->";
                  }else{
-                    
+                     conc2+="x"+"->";
                  } 
                      
                  }else{
