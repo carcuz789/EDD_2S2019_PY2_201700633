@@ -1,18 +1,1 @@
-digraph g {rankdir=LR;
-node[shape=record]
-subgraph cluster1 {  
-rank=same;
-NC[label="\\"];
-
-yc1[label="c1"];
-yc2[label="c2"];yc3[label="c3"];
-yc4[label="c4"];
-NC->yc1->yc2->yc3->yc4[constraint=false];
-}
-
-xc1[label="c1"];
-xc2[label="c2"];
-xc3[label="c3"];
-xc4[label="c4"];
-NC->xc1->xc2->xc3->xc4;
-}
+digraph g {rankdir=LR;node[shape=record]subgraph cluster1 {  rank=same;NC[label="\\"];y[label="\\"];yc1[label="c1"];yc2[label="c2"];yc3[label="c3"];yc4[label="c4"];NC->y->yc1->yc2->yc3->yc4[constraint=false];}x[label="\\"];xc1[label="c1"];xc2[label="c2"];xc3[label="c3"];xc4[label="c4"];NC->x->xc1->xc2->xc3->xc4;}
