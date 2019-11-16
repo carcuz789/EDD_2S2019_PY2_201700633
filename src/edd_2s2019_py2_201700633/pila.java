@@ -99,9 +99,12 @@ public class pila {
             String conexiones="";
             StackNode temp = root; 
             int i=0;
+            int k=0;
                     while(temp!=null) {
-                     bw.write(i+" [label=\"{<f0> "+i+" |<f1> Usuario -"+"vacio"+" |<f2> contraseña - "+"vacio"+" }\"];");                          
-                       i++;        
+                     bw.write(i+" [label=\"{<f0> Operacion - "+temp.operacion+" |<f1> tipo -"+temp.tipo+" |<f2> Hora - "+temp.hora+" |<f3> Fecha - "+temp.fecha+" |<f4> Usuario - "+temp.Usuario+" }\"];");                          
+                       i++;
+                       k=i+1;
+                       conexiones+=i+"->"+k+";";
                        temp=temp.next;
                     }
             bw.write(conexiones);

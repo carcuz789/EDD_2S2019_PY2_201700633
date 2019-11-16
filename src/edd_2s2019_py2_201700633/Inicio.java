@@ -5,6 +5,7 @@
  */
 package edd_2s2019_py2_201700633;
 
+import edd_2s2019_py2_201700633.AVLTree.Nod;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import javax.swing.JOptionPane;
@@ -26,7 +27,8 @@ public static DLL ListaGen= new DLL();
         String Contraseña = getSHA256("admin");
         Tabla.insertar("admin",Contraseña );
         AVLTree arbol = new AVLTree();
-        ListaGen.push(0,0,"\\","admin","\\","\\",arbol,"C");
+        Nod nodo=null;
+        ListaGen.push(0,0,"\\","admin","\\","\\",arbol,"C",nodo);
         //ListaGen.printlist(ListaGen.head);
         //AVLTree arbol=new AVLTree();
         //ListaGen.InsertarFinal(ListaGen,0,0, "/", "admin", "/", "/",arbol ,"C" );

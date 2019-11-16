@@ -539,9 +539,9 @@ Inicio ini;
                try{      
                     if (ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual)!=null) {
                               Node nodo =ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual);
-                              Nod rooti =nodo.Nodoarbol;
+                              
                               int valor = GenerarClave(nombre);
-                              rooti=nodo.arbol.insert(rooti, valor, nombre, contenido);
+                              nodo.Nodoarbol=nodo.arbol.insert(nodo.Nodoarbol, valor, nombre, contenido);
                         }else{
                             JOptionPane.showMessageDialog(null,"ARBLO AVL NO ENCONTRADO" );
                     }
@@ -582,10 +582,9 @@ Inicio ini;
                 if (ini.ListaGen.Existe(ListaGen.head,NombreUs,NombreArch)== false) {
                     //buscar el arbol e ingressar
                         if (ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual)!=null) {
-                              Node nodo =ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual);
-                              Nod rooti =nodo.Nodoarbol;
+                              Node nodo =ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual);                             
                               int valor = GenerarClave(NombreArch);
-                              rooti=nodo.arbol.insert(rooti, valor, NombreArch, CONTENIDO);
+                              nodo.Nodoarbol=nodo.arbol.insert(nodo.Nodoarbol, valor, NombreArch, CONTENIDO);
                         }else{
                             JOptionPane.showMessageDialog(null,"ARBLO AVL NO ENCONTRADO" );
                     }

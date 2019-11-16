@@ -5,6 +5,7 @@
  */
 package edd_2s2019_py2_201700633;
 
+import edd_2s2019_py2_201700633.AVLTree.Nod;
 import java.io.File;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -148,7 +149,8 @@ public class CrearUsuario extends javax.swing.JFrame {
                  String Contraseña = getSHA256(this.txt_contraseña.getText());
                  hola.Tabla.insertar(Usuario, Contraseña);
                  AVLTree arbol = new AVLTree();
-                 hola.ListaGen.append(0,0,"\\",Usuario,"\\","\\",arbol,"C");                 
+                 Nod nodo =null;
+                 hola.ListaGen.append(0,0,"\\",Usuario,"\\","\\",arbol,"C",nodo);                 
         
             }else{
                  JOptionPane.showMessageDialog(null,"INGRESE UNA CONTRASEÑA VALIDA" );

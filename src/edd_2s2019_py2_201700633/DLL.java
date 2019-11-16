@@ -5,6 +5,10 @@
  */
 package edd_2s2019_py2_201700633;
 
+import java.io.*;
+import javax.swing.JOptionPane;
+import edd_2s2019_py2_201700633.AVLTree.*;
+
 /**
  *
  * @author Rodrigo Carcuz
@@ -23,12 +27,13 @@ public class DLL {
     public String nombredir; 
     public String tipo;
     public AVLTree arbol;
+    public Nod Nodoarbol;
         Node prev; 
         Node next; 
   
         // Constructor to create a new node 
         // next and prev is by default initialized as null 
-        Node(int x,int y,String nombredir,String Usuario,String rutax,String rutay,AVLTree arbol,String tipo){
+        Node(int x,int y,String nombredir,String Usuario,String rutax,String rutay,AVLTree arbol,String tipo,Nod nodoarbol){
         this.x = x;
         this.y =y;
         this.nombredir=nombredir;
@@ -37,15 +42,16 @@ public class DLL {
         this.rutay=rutay;
         this.arbol=arbol;
         this.tipo = tipo;
+        this.Nodoarbol=nodoarbol;
         }
     } 
   
     // Adding a node at the front of the list 
-    public void push(int x,int y,String nombredir,String Usuario,String rutax,String rutay,AVLTree arbol,String tipo) 
+    public void push(int x,int y,String nombredir,String Usuario,String rutax,String rutay,AVLTree arbol,String tipo,Nod nodoarbol) 
     { 
         /* 1. allocate node  
         * 2. put in the data */
-        Node new_Node = new Node(x,y,nombredir,Usuario,rutax,rutay,arbol,tipo); 
+        Node new_Node = new Node(x,y,nombredir,Usuario,rutax,rutay,arbol,tipo,nodoarbol); 
   
         /* 3. Make next of new node as head and previous as NULL */
         new_Node.next = head; 
@@ -60,7 +66,7 @@ public class DLL {
     } 
   
     /* Given a node as prev_node, insert a new node after the given node */
-    public void InsertAfter(Node prev_Node, int x,int y,String nombredir,String Usuario,String rutax,String rutay,AVLTree arbol,String tipo) 
+    public void InsertAfter(Node prev_Node, int x,int y,String nombredir,String Usuario,String rutax,String rutay,AVLTree arbol,String tipo,Nod nodoarbol) 
     { 
   
         /*1. check if the given prev_node is NULL */
@@ -71,7 +77,7 @@ public class DLL {
   
         /* 2. allocate node  
         * 3. put in the data */
-        Node new_node = new Node(x,y,nombredir,Usuario,rutax,rutay,arbol,tipo); 
+        Node new_node = new Node(x,y,nombredir,Usuario,rutax,rutay,arbol,tipo,nodoarbol); 
   
         /* 4. Make next of new node as next of prev_node */
         new_node.next = prev_Node.next; 
@@ -88,11 +94,11 @@ public class DLL {
     } 
   
     // Add a node at the end of the list 
-    void append(int x,int y,String nombredir,String Usuario,String rutax,String rutay,AVLTree arbol,String tipo) 
+    void append(int x,int y,String nombredir,String Usuario,String rutax,String rutay,AVLTree arbol,String tipo,Nod nodoarbol) 
     { 
         /* 1. allocate node  
         * 2. put in the data */
-        Node new_node = new Node(x,y,nombredir,Usuario,rutax,rutay,arbol,tipo); 
+        Node new_node = new Node(x,y,nombredir,Usuario,rutax,rutay,arbol,tipo,nodoarbol); 
   
         Node last = head; /* used in step 5*/
   
@@ -154,10 +160,29 @@ public class DLL {
               return true;
           }
     }
+    
+    public Node RetornaNodo(Node node,String usuario,String nombreCarpeta){
+        Node last = null;
+         int estado=0;
+         Node aux=null;
+          while (node != null) { 
+     
+              if (node.usuario.equals(usuario)) {
+                  if (node.nombredir.equals(nombreCarpeta)) {
+                      estado=1;
+                      aux=node;
+                  }
+              }
+            last = node; 
+            node = node.next; 
+        }
+          return aux;
+    }
     public String Contenido(Node node,String usuario,String nombrearch){
          Node last = null;
          int estado=0;
           while (node != null) { 
+     
               if (node.usuario.equals(usuario)) {
                   if (node.nombredir.equals(nombrearch)) {
                       estado=1;
@@ -170,6 +195,55 @@ public class DLL {
             return "false";
         }else{
               return node.tipo;
+          }
+    }
+     public void modificarCAR(Node node,String usuario,String nombrearch,String modificacion){
+         Node last = null;
+         int estado=0;
+          while (node != null) { 
+              if (node.usuario.equals(usuario)) {
+                  if (node.nombredir.equals(nombrearch)) {
+                      node.nombredir=modificacion;
+                      estado=1;
+                       JOptionPane.showMessageDialog(null," MODIFICACION EXITOSA " );
+                  }
+              }
+            last = node; 
+            node = node.next; 
+        }
+          if (estado!=1) {
+             JOptionPane.showMessageDialog(null," MODIFICAION ERRONEA " );
+         }
+        
+    }
+     public  void descargar(Node node,String usuario,String nombrearch) throws IOException{
+         Node last = null;
+         int estado=0;
+          while (node != null) { 
+              if (node.usuario.equals(usuario)) {
+                  if (node.nombredir.equals(nombrearch)) {
+                      estado=1;
+                      //AQUI CREO EL ARCHIVO
+                       String ruta = node.nombredir;
+                       File archivo = new File(ruta);
+                       BufferedWriter bw;
+                       if(archivo.exists()) {
+                                   bw = new BufferedWriter(new FileWriter(archivo));
+                                   bw.write(node.tipo);
+                           } else {
+                                      bw = new BufferedWriter(new FileWriter(archivo));
+                                       bw.write(node.tipo);
+                            }
+                        bw.close();
+                  }
+              }
+            last = node; 
+            node = node.next; 
+        }
+          if (estado==0) {
+            JOptionPane.showMessageDialog(null," DESCARGA ERRONEA ARCHIVO  NOT FOUND" );
+        }else{
+              JOptionPane.showMessageDialog(null,"DESCARGA EXITOSA " );
           }
     }
 }
