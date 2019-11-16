@@ -13,29 +13,30 @@ import java.io.*;
 import java.util.*;
 
 public class AVLTree {
-    public class Node {
-        private Node left, right, parent;
+    String concatenar="";
+    public class Nod {
+        private Nod left, right, parent;
         private int height = 1;
         private int value;
         private String Nombre;
         private String Contenido;
 
-        private Node (int val,String Nombre,String Contenido) {
+        private Nod (int val,String Nombre,String Contenido) {
             this.value = val;
             this.Nombre = Nombre;
             this.Contenido = Contenido;
         }
     }
-    private int height (Node N) {
+    public int height (Nod N) {
         if (N == null)
             return 0;
         return N.height;
     }
 
-    private Node insert(Node node, int value,String Nombre,String Contenido) {
+    public Nod insert(Nod node, int value,String Nombre,String Contenido) {
         /* 1.  Perform the normal BST rotation */
         if (node == null) {
-            return(new Node(value,Nombre,Contenido));
+            return(new Nod(value,Nombre,Contenido));
         }
 
         if (value < node.value)
@@ -78,9 +79,9 @@ public class AVLTree {
         return node;
     }
 
-    private Node rightRotate(Node y) {
-        Node x = y.left;
-        Node T2 = x.right;
+    public Nod rightRotate(Nod y) {
+        Nod x = y.left;
+        Nod T2 = x.right;
 
         // Perform rotation
         x.right = y;
@@ -94,9 +95,9 @@ public class AVLTree {
         return x;
     }
 
-    private Node leftRotate(Node x) {
-        Node y = x.right;
-        Node T2 = y.left;
+    public Nod leftRotate(Nod x) {
+        Nod y = x.right;
+        Nod T2 = y.left;
 
         // Perform rotation
         y.left = x;
@@ -111,29 +112,32 @@ public class AVLTree {
     }
 
     // Get Balance factor of node N
-    private int getBalance(Node N) {
+    public int getBalance(Nod N) {
         if (N == null)
             return 0;
         return height(N.left) - height(N.right);
     }
 
-    public void preOrder(Node root) {
+    public void preOrder(Nod root) {
         if (root != null) {
             preOrder(root.left);
-            System.out.printf("%d ", root.value);
+           // System.out.printf("%d ", root.value);
+            concatenar+=root.Nombre+" [shape=record, label=\"<C0>| nombre : "+root.Nombre+"\n contenido :"+root.Contenido+"|<C1>\"];\n";
             preOrder(root.right);
         }
     }
-
-    private Node minValueNode(Node node) {
-        Node current = node;
+    public void ImprimirArbolin(Nod root){
+        preOrder(root);
+    }
+    public Nod minValueNode(Nod node) {
+        Nod current = node;
         /* loop down to find the leftmost leaf */
         while (current.left != null)
             current = current.left;
         return current;
     }
 
-    private Node deleteNode(Node root, int value) {
+    public Nod deleteNode(Nod root, int value) {
         // STEP 1: PERFORM STANDARD BST DELETE
 
         if (root == null)
@@ -155,7 +159,7 @@ public class AVLTree {
             // node with only one child or no child
             if( (root.left == null) || (root.right == null) ) {
 
-                Node temp;
+                Nod temp;
                 if (root.left != null)
                         temp = root.left;
                 else
@@ -174,7 +178,7 @@ public class AVLTree {
             else {
                 // node with two children: Get the inorder successor (smallest
                 // in the right subtree)
-                Node temp = minValueNode(root.right);
+                Nod temp = minValueNode(root.right);
 
                 // Copy the inorder successor's data to this node
                 root.value = temp.value;
@@ -220,7 +224,7 @@ public class AVLTree {
         return root;
     }
 
-    public void print(Node root) {
+    public void print(Nod root) {
 
         if(root == null) {
             System.out.println("(XXXXXX)");
@@ -231,8 +235,8 @@ public class AVLTree {
             width = (int)Math.pow(2, height-1);
 
         // Preparing variables for loop.
-        List<Node> current = new ArrayList<Node>(1),
-            next = new ArrayList<Node>(2);
+        List<Nod> current = new ArrayList<Nod>(1),
+            next = new ArrayList<Nod>(2);
         current.add(root);
 
         final int maxHalfLength = 4;
@@ -252,7 +256,7 @@ public class AVLTree {
             textBuffer = sb.toString();
 
             // Print tree node elements
-            for(Node n : current) {
+            for(Nod n : current) {
 
                 System.out.print(textBuffer);
 
@@ -278,7 +282,7 @@ public class AVLTree {
             // Print tree node extensions for next level.
             if(i < height - 1) {
 
-                for(Node n : current) {
+                for(Nod n : current) {
 
                     System.out.print(textBuffer);
 
@@ -299,7 +303,7 @@ public class AVLTree {
             // Renewing indicators for next run.
             elements *= 2;
             current = next;
-            next = new ArrayList<Node>(elements);
+            next = new ArrayList<Nod>(elements);
 
         }
 
