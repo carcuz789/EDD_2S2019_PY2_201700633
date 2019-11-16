@@ -411,7 +411,8 @@ int ver=0;
          y++;
          
          if (ini.ListaGen.Existe(ListaGen.head,NombreUs,Usu)== false) {
-         
+         vertical[ver]=Usu;
+             ver++;
          ini.ListaGen.push(x,y,Usu,this.NombreUs,Rutax,Rutay,arbol, "C",nodo);
          DefaultTableModel  modelo=(DefaultTableModel) this.jTable1.getModel();
          modelo.addRow(new Object[]{Usu,"CARPETA"});       
@@ -537,8 +538,7 @@ int ver=0;
               
                  if (ini.ListaGen.Existe(ListaGen.head,NombreUs,nombre)== false) {
                     //buscar el arbol e ingressar
-                        vertical[ver]=nombre;
-                        ver++;
+                        
                         if (ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual)!=null) {
                               Node nodo =ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual);                             
                               int valor = GenerarClave(nombre);
@@ -581,8 +581,7 @@ int ver=0;
                  //Rutax=NombreArch;
                 if (ini.ListaGen.Existe(ListaGen.head,NombreUs,NombreArch)== false) {
                     //buscar el arbol e ingressar
-                       vertical[ver]=NombreArch;
-                       ver++;
+                      
                         if (ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual)!=null) {
                               Node nodo =ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual);                             
                               int valor = GenerarClave(NombreArch);
@@ -605,6 +604,7 @@ int ver=0;
         ini.ListaGen.printlist(ListaGen.head);   
         crearGrafo();
         ARBOLIN();
+        Ortogonal();
     }//GEN-LAST:event_jb_reportesParalosUdActionPerformed
 
     private void jb_abrircarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_abrircarpetaActionPerformed
@@ -675,32 +675,56 @@ int ver=0;
             bw.write("subgraph cluster1 {");
             bw.write("  rank=same;");
             int i=0;
-            bw.write("NC[label=\"\\\"];");
+            bw.write("NC[label=\"\\\\\"];");
             String conc="NC->";
              do {
-                 bw.write("y"+vertical[i]+"[label=\""+vertical[i]+"\"];");
+                 if (!vertical[i].equals("\\")) {
+                    
+                 }else{
+                      bw.write("y"+"[label=\""+vertical[i]+"\"];");
+                 }                 
                  i++;
-                 if (vertical[i]!=null) {
+                 if (vertical[i+1]!=null) {
+                     if (!vertical[i].equals("\\")) {
                      conc+="y"+vertical[i]+"->";
                  }else{
-                      conc+="y"+vertical[i];
+                    
+                 } 
+                     
+                 }else{
+                     if (vertical[i]!=null) {
+                          conc+="y"+vertical[i];
+                     }
+                     
                  }
              } while (vertical[i]!=null);
              conc+="[constraint=false];";
             bw.write(conc);
             bw.write("}");  
                 String conc2="NC->";
+                i=0;
              do {
-                 bw.write("x"+vertical[i]+"[label=\""+vertical[i]+"\"];");
+                 if (!vertical[i].equals("\\")) {
+                    
+                 }else{
+                      bw.write("x"+"[label=\""+vertical[i]+"\"];");
+                 }   
                  i++;
-                 if (vertical[i]!=null) {
+                 if (vertical[i+1]!=null) {
+                    if (!vertical[i].equals("\\")) {
                      conc2+="x"+vertical[i]+"->";
                  }else{
-                      conc2+="x"+vertical[i];
+                    
+                 } 
+                 }else{
+                     if (vertical[i]!=null) {
+                         conc2+="x"+vertical[i];
+                     }
+                      
                  }
              } while (vertical[i]!=null);
-             conc2+="[constraint=false];";  
-             
+             conc2+=";";  
+             bw.write(conc2);
             bw.write("}");  
             bw.close();
             try {
