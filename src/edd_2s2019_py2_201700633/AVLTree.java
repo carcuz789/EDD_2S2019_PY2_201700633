@@ -14,6 +14,7 @@ import java.util.*;
 
 public class AVLTree {
     String concatenar="";
+    String con="";
     public class Nod {
         private Nod left, right, parent;
         private int height = 1;
@@ -120,14 +121,52 @@ public class AVLTree {
 
     public void preOrder(Nod root) {
         if (root != null) {
+            if (root.left!=null) {
+              
+                con+=root.Nombre.replace(".", "l")+"->"+root.left.Nombre.replace(".", "l")+";\n";
+            }
+            if (root.right!=null) {
+                con+=root.Nombre.replace(".", "l")+"->"+root.right.Nombre.replace(".", "l")+";\n";
+            }
             preOrder(root.left);
-           // System.out.printf("%d ", root.value);
-            concatenar+=root.Nombre+" [shape=record, label=\"<C0>| nombre : "+root.Nombre+"\n contenido :"+root.Contenido+"|<C1>\"];\n";
+            // System.out.printf("%d ", root.value);            
+            concatenar+=root.Nombre.replace(".", "l")+"[shape=record, label=\"<C0>| nombre : "+root.Nombre+"\n contenido :"+root.Contenido+"|<C1>\"];\n";
             preOrder(root.right);
         }
     }
     public void ImprimirArbolin(Nod root){
         preOrder(root);
+        String conexion="";
+        int estado=0;
+        
+          try {
+            String ruta = "Avl.txt";
+            File file = new File(ruta);
+            // Si el archivo no existe es creado
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("digraph g {");
+            bw.write(concatenar);
+            bw.write(con);
+            bw.write("}");          
+           
+            bw.close();
+            try {
+    // Execute a command without arguments
+                    String command = "dot -Tjpg Avl.txt -o AVL.jpg";
+                     Process child = Runtime.getRuntime().exec(command);
+                     child = Runtime.getRuntime().exec(command);
+                } catch (Exception e) {
+                }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
     public Nod minValueNode(Nod node) {
         Nod current = node;
