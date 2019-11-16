@@ -27,6 +27,8 @@ import javax.swing.table.*;
  */
 public class ManejadorArch extends javax.swing.JFrame {
 Inicio ini;
+private String[] vertical = new String[100];
+int ver=0;
  String ArchivoActual="\\";
  String Ruta ="\\";
  String NombreUs ="";
@@ -42,7 +44,8 @@ Inicio ini;
         initComponents();
     
         NombreUs = Usuario;
-        
+        vertical[ver]="\\";
+        ver++;
          //modelo.addRow();
         if (Usuario.equals("admin")) {
             Rutax = "\\";
@@ -88,7 +91,7 @@ Inicio ini;
         jb_crearArchivo = new javax.swing.JButton();
         jb_modificarArchivos = new javax.swing.JButton();
         jb_eliminarArchivos = new javax.swing.JButton();
-        jb_Descargar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jb_cargausuarios = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -96,7 +99,6 @@ Inicio ini;
         jb_compartir = new javax.swing.JButton();
         jb_reportesParalosUd = new javax.swing.JButton();
         jb_abrircarpeta = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jb_reporteusuarios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -176,7 +178,12 @@ Inicio ini;
 
         jb_eliminarArchivos.setText("Eliminar");
 
-        jb_Descargar.setText("Descargar");
+        jButton1.setText("Download");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -187,12 +194,15 @@ Inicio ini;
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jb_crearArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_modificarArchivos, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                    .addComponent(jb_eliminarArchivos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_Descargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jb_crearArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jb_modificarArchivos, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                            .addComponent(jb_eliminarArchivos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,9 +214,9 @@ Inicio ini;
                 .addComponent(jb_modificarArchivos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jb_eliminarArchivos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jb_Descargar)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         jb_cargausuarios.setText("Carga Usuarios");
@@ -257,13 +267,6 @@ Inicio ini;
             }
         });
 
-        jButton1.setText("Download");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -273,21 +276,18 @@ Inicio ini;
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jb_compartir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jb_reportesParalosUd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_abrircarpeta, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jb_abrircarpeta, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jb_compartir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jb_reportesParalosUd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jb_abrircarpeta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -532,26 +532,26 @@ Inicio ini;
                //Hacer lo que sea con la línea leída
                
                  String[] Var=texto.split(",");        
-                 String contenido= getSHA256(Var[1]);
-                 String nombre=Var[0];
+                 String contenido= Var[1];
+                 String nombre=Var[0].trim();
+              
                  if (ini.ListaGen.Existe(ListaGen.head,NombreUs,nombre)== false) {
-                
-               try{      
-                    if (ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual)!=null) {
-                              Node nodo =ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual);
-                              
+                    //buscar el arbol e ingressar
+                        vertical[ver]=nombre;
+                        ver++;
+                        if (ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual)!=null) {
+                              Node nodo =ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual);                             
                               int valor = GenerarClave(nombre);
                               nodo.Nodoarbol=nodo.arbol.insert(nodo.Nodoarbol, valor, nombre, contenido);
                         }else{
                             JOptionPane.showMessageDialog(null,"ARBLO AVL NO ENCONTRADO" );
                     }
-                   ini.ListaGen.push(x,y,nombre,this.NombreUs,Rutay,Rutay,null,contenido,null);                   
-               }catch(Exception e){
-                 System.out.println("no insertado");
-               }   
-               }else{
+                 ini.ListaGen.push(x,y,nombre,this.NombreUs,Rutay,Rutay,null, contenido,null);
+                  DefaultTableModel  modelo=(DefaultTableModel) this.jTable1.getModel();
+                 modelo.addRow(new Object[]{nombre,"ARCHIVO"});
+                }else{                        
                       JOptionPane.showMessageDialog(null,"!ARCHIVO EXISTENTE¡");
-                 }
+                    }
               
                texto = br.readLine();
            }
@@ -581,6 +581,8 @@ Inicio ini;
                  //Rutax=NombreArch;
                 if (ini.ListaGen.Existe(ListaGen.head,NombreUs,NombreArch)== false) {
                     //buscar el arbol e ingressar
+                       vertical[ver]=NombreArch;
+                       ver++;
                         if (ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual)!=null) {
                               Node nodo =ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual);                             
                               int valor = GenerarClave(NombreArch);
@@ -651,11 +653,68 @@ Inicio ini;
             Node aux = ini.ListaGen.RetornaNodo(ListaGen.head, NombreUs, ArchivoActual);
             AVLTree arb = aux.arbol;
             Nod nodo=aux.Nodoarbol;
-            arb.print(nodo);
+            arb.ImprimirArbolin(nodo);
         }else{
               JOptionPane.showMessageDialog(null,"ARBLO AVL NO ENCONTRADO" );
         }
         
+    }
+    public void Ortogonal(){
+         try {
+            String ruta = "ortogonal.txt";
+            File file = new File(ruta);
+            // Si el archivo no existe es creado
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("digraph g {");
+            bw.write("rankdir=LR;");
+            bw.write("node[shape=record]");
+            bw.write("subgraph cluster1 {");
+            bw.write("  rank=same;");
+            int i=0;
+            bw.write("NC[label=\"\\\"];");
+            String conc="NC->";
+             do {
+                 bw.write("y"+vertical[i]+"[label=\""+vertical[i]+"\"];");
+                 i++;
+                 if (vertical[i]!=null) {
+                     conc+="y"+vertical[i]+"->";
+                 }else{
+                      conc+="y"+vertical[i];
+                 }
+             } while (vertical[i]!=null);
+             conc+="[constraint=false];";
+            bw.write(conc);
+            bw.write("}");  
+                String conc2="NC->";
+             do {
+                 bw.write("x"+vertical[i]+"[label=\""+vertical[i]+"\"];");
+                 i++;
+                 if (vertical[i]!=null) {
+                     conc2+="x"+vertical[i]+"->";
+                 }else{
+                      conc2+="x"+vertical[i];
+                 }
+             } while (vertical[i]!=null);
+             conc2+="[constraint=false];";  
+             
+            bw.write("}");  
+            bw.close();
+            try {
+    // Execute a command without arguments
+                    String command = "dot -Tjpg ortogonal.txt -o ortogonal.jpg";
+                     Process child = Runtime.getRuntime().exec(command);
+                     child = Runtime.getRuntime().exec(command);
+                } catch (Exception e) {
+                }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     private void jb_reporteusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_reporteusuariosActionPerformed
         // TODO add your handling code here:
@@ -728,7 +787,6 @@ Inicio ini;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton jb_Descargar;
     private javax.swing.JButton jb_abrircarpeta;
     private javax.swing.JButton jb_cargausuarios;
     private javax.swing.JButton jb_compartir;
