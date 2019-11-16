@@ -679,11 +679,9 @@ int ver=0;
             String conc="NC->";
              do {
                  if (!vertical[i].equals("\\")) {
-                    
-                 }else{
-                      bw.write("y"+"[label=\""+vertical[i]+"\"];");
-                 }                 
-                 i++;
+                    bw.write("y"+vertical[i]+"[label=\""+vertical[i]+"\"];");
+                 }               
+             
                  if (vertical[i+1]!=null) {
                      if (!vertical[i].equals("\\")) {
                      conc+="y"+vertical[i]+"->";
@@ -692,36 +690,31 @@ int ver=0;
                  } 
                      
                  }else{
-                     if (vertical[i]!=null) {
-                          conc+="y"+vertical[i];
-                     }
-                     
+                     conc+="y"+vertical[i]; 
                  }
+                     i++;
              } while (vertical[i]!=null);
              conc+="[constraint=false];";
             bw.write(conc);
             bw.write("}");  
-                String conc2="NC->";
+            String conc2="NC->";
                 i=0;
              do {
                  if (!vertical[i].equals("\\")) {
-                    
-                 }else{
-                      bw.write("x"+"[label=\""+vertical[i]+"\"];");
-                 }   
-                 i++;
+                    bw.write("x"+vertical[i]+"[label=\""+vertical[i]+"\"];");
+                 }               
+             
                  if (vertical[i+1]!=null) {
-                    if (!vertical[i].equals("\\")) {
+                     if (!vertical[i].equals("\\")) {
                      conc2+="x"+vertical[i]+"->";
                  }else{
                     
                  } 
+                     
                  }else{
-                     if (vertical[i]!=null) {
-                         conc2+="x"+vertical[i];
-                     }
-                      
+                     conc2+="x"+vertical[i]; 
                  }
+                     i++;
              } while (vertical[i]!=null);
              conc2+=";";  
              bw.write(conc2);
