@@ -672,10 +672,14 @@ int ver=0;
             bw.write("digraph g {");
             bw.write("rankdir=LR;");
             bw.write("node[shape=record]");
+            
             bw.write("subgraph cluster1 {");
             bw.write("  rank=same;");
             int i=0;
             bw.write("NC[label=\"(*)\"];");
+            //escribir los nodos para despues conectarlos a x and y
+            
+           
             String conc="NC->";
              do {
                  if (!vertical[i].equals("\\")) {
@@ -721,7 +725,21 @@ int ver=0;
                      i++;
              } while (vertical[i]!=null);
              conc2+=";";  
+             String nodos= ini.ListaGen.RetornarNodos(ListaGen.head,NombreUs);   
+             bw.write(nodos);
              bw.write(conc2);
+             int k=0;
+             do {
+                 String conexiones =ini.ListaGen.RetornarConexionNodoscony(ListaGen.head,NombreUs,vertical[k]);
+                 if (conexiones!="false") {
+                      bw.write(conexiones.substring(0, conexiones.length()-2)+";");
+                 }              
+                 
+                 k++;
+                 
+             } while (vertical[k]!=null);
+
+             //bw.write(conexiones);
             bw.write("}");  
             bw.close();
             try {
