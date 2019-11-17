@@ -1,4 +1,7 @@
-digraph g {rankdir=LR;node[shape=record]Hc4C1 [label="c4"];Hc3C1 [label="c3"];Hc2C1 [label="c2"];Hc1C1 [label="c1"];HC1 [label="\\"];HC1 ->Hc4C1 ;
+digraph g {rankdir=LR;node[shape=record]Hc25C1 [label="c25"];Hc78C1 [label="c78"];Hc789C1 [label="c789"];Hc12C1 [label="c12"];Hc3C1 [label="c3"];Hc2C1 [label="c2"];Hc1C1 [label="c1"];HC1 [label="\\"];Hc2C1 ->Hc25C1 ;
+Hc2C1 ->Hc78C1 ;
+Hc1C1 ->Hc789C1 ;
+Hc1C1 ->Hc12C1 ;
 HC1 ->Hc3C1 ;
 HC1 ->Hc2C1 ;
 HC1 ->Hc1C1 ;

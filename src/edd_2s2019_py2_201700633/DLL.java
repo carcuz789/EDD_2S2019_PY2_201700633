@@ -15,6 +15,7 @@ import edd_2s2019_py2_201700633.AVLTree.*;
  */
 public class DLL { 
     Node head; // head of list 
+ 
   
     /* Doubly Linked list Node*/
     class Node { 
@@ -195,6 +196,77 @@ public class DLL {
             return "false";
         }else{
               return node.tipo;
+          }
+    }
+    public String RetornarNodos(Node node,String usuario){
+         Node last = null;
+         int estado=0;
+         String conca="";
+          while (node != null) { 
+     
+              if (node.usuario.equals(usuario)) {
+                  if (node.tipo.equals("C")) {
+                      estado=1; 
+                      if (!node.nombredir.equals("\\")) {
+                       
+                           conca+=node.nombredir+"[label=\" "+node.rutay+"\\\\"+node.nombredir+"\"];\n";
+                        
+                      }
+                      
+                  }
+              }
+            last = node; 
+            node = node.next; 
+        }
+          if (estado==0) {
+            return "false";
+        }else{
+              return conca ;
+          }
+    }
+    public String RetornarConexionNodoscony(Node node,String usuario,String rutay){
+         Node last = null;
+          String lista[]  = new String[100];
+          int numero=0;
+         int estado=0;
+         String conca="";
+         if (rutay.equals("\\")) {
+            conca+="y ->";
+        }else{
+             conca+="y"+rutay+"->";
+         }
+         
+          while (node != null) { 
+     
+              if (node.usuario.equals(usuario)) {
+                  if (node.tipo.equals("C")) {
+                       
+                      if (!node.nombredir.equals("\\")) {                        
+  
+                     // conca+="x"+node.nombredir+"->"+node.nombredir+"[constraint=false];\n";
+                          if (node.rutay.equals(rutay)) {
+                              estado=1;
+                              lista[numero]=node.nombredir;
+                              numero++;
+                             // conca+=node.nombredir+"->";
+                           }                     
+                         
+                      }
+                      
+                  }
+              }
+            last = node; 
+            node = node.next; 
+        }
+          if (estado==0) {
+            return "false";
+        }else{
+              for (int i = lista.length-1; i >=0 ; i--) {
+                  if (lista[i]!=null) {
+                      conca+=lista[i]+"->";
+                  }
+              }
+              return conca ;
           }
     }
      public void modificarCAR(Node node,String usuario,String nombrearch,String modificacion){
