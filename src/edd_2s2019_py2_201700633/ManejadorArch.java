@@ -8,6 +8,7 @@ package edd_2s2019_py2_201700633;
 import edd_2s2019_py2_201700633.AVLTree.Nod;
 import edd_2s2019_py2_201700633.DLL.Node;
 import static edd_2s2019_py2_201700633.Inicio.*;
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -605,6 +606,18 @@ int ver=0;
         crearGrafo();
         ARBOLIN();
         Ortogonal();
+        File file = new File( "C:\\Users\\Rodrigo Carcuz\\Desktop\\EDD_2S2019_PY2_201700633\\grafon.jpg" );
+        File file1 = new File( "C:\\Users\\Rodrigo Carcuz\\Desktop\\EDD_2S2019_PY2_201700633\\AVL.jpg" );
+        
+        File file3 = new File( "C:\\Users\\Rodrigo Carcuz\\Desktop\\EDD_2S2019_PY2_201700633\\ortogonal.jpg" );
+    try {
+        Desktop.getDesktop().open(file);
+        Desktop.getDesktop().open(file1);
+        
+        Desktop.getDesktop().open(file3);
+    } catch (IOException ex) {
+        Logger.getLogger(ManejadorArch.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_jb_reportesParalosUdActionPerformed
 
     private void jb_abrircarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_abrircarpetaActionPerformed
@@ -773,11 +786,9 @@ int ver=0;
     private void jb_reporteusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_reporteusuariosActionPerformed
         // TODO add your handling code here:
          ini.Tabla.Imprimir();
+         File file2 = new File( "C:\\Users\\Rodrigo Carcuz\\Desktop\\EDD_2S2019_PY2_201700633\\HashTable.jpg" );
          try {
-    // Execute a command without arguments
-                    String command = "C:\\Users\\Rodrigo Carcuz\\Desktop\\EDD_2S2019_PY2_201700633\\HashTable.jpg";
-                     Runtime.getRuntime().exec(command);
-                     
+                  Desktop.getDesktop().open(file2);
                 } catch (Exception e) {
                      JOptionPane.showMessageDialog(null,"NO SE ENCONTRO LA IMAGEN" );
                 }
