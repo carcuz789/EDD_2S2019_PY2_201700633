@@ -370,7 +370,7 @@ int ver=0;
                  String nombre=Var[0];
                  
                try{
-                   insertar(nombre,Contra);
+                   insertar(nombre.trim(),Contra.trim());
                }catch(Exception e){
                  System.out.println("no insertado");
                }
@@ -435,7 +435,7 @@ int ver=0;
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("digraph g {");
-            bw.write("rankdir=LR;");
+            bw.write("splines=ortho;");
             bw.write("node[shape=record]");
             
             //hacer nodos
@@ -631,9 +631,15 @@ int ver=0;
                               node = node.next; 
                          }                       
                      }else{
-                          modelo.addRow(new Object[]{node.nombredir,"CARPETA"});
+                         if (node.nombredir.equals("\\")) {
+                              last = node; 
+                              node = node.next; 
+                         }else{
+                              modelo.addRow(new Object[]{node.nombredir,"CARPETA"});
                           last = node; 
                           node = node.next; 
+                         }
+                         
                      }
    
              }else{
@@ -672,7 +678,7 @@ int ver=0;
             bw.write("digraph g {");
             bw.write("rankdir=LR;");
             bw.write("node[shape=record]");
-            
+            bw.write("splines=ortho;");
             bw.write("subgraph cluster1 {");
             bw.write("  rank=same;");
             int i=0;
@@ -738,6 +744,15 @@ int ver=0;
                  k++;
                  
              } while (vertical[k]!=null);
+             int var=0;
+             do {
+                 if (!vertical[var].equals("\\")) {
+                      bw.write("x"+vertical[var]+"->"+vertical[var]+";");
+                 }
+                
+                 var++;
+             } while (vertical[var]!=null);
+
 
              //bw.write(conexiones);
             bw.write("}");  
@@ -775,6 +790,7 @@ int ver=0;
          String contenido =ini.ListaGen.Contenido(ListaGen.head,NombreUs,arch);
          if (ini.ListaGen.Existe(ListaGen.head,NombreUs,arch)== true) {
               ListaGen.push(x,y,arch,us,"\\","\\",null,contenido,null);
+                 JOptionPane.showMessageDialog(null,"ARCHIVO COMPARTIDO" );
         }else{
                JOptionPane.showMessageDialog(null,"ARCHIVO NO EXISTE" );
          }
