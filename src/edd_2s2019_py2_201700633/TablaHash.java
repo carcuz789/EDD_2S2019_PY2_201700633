@@ -194,14 +194,14 @@ public class TablaHash {
                         if (vectorHash[i]!=null) {
                            String us= vectorHash[i].usuario;
                            String contra = vectorHash[i].contraseña;
-                           bw.write(i+" [label=\"{<f0> "+i+" |<f1> Usuario -"+us+" |<f2> contraseña - "+contra+" }\"];");
+                           bw.write(i+" [label=\"numero ------- "+i+"----- Usuario - "+us+"  contraseña - "+contra+" \"];");
                           
                            if (i<tamano-1) {
                             
                             conexiones+=i+"->"+k+";\n";
                         } 
                         }else{
-                               bw.write(i+" [label=\"{<f0> "+i+" |<f1> Usuario -"+"vacio"+" |<f2> contraseña - "+"vacio"+" }\"];");                          
+                               bw.write(i+" [label=\"numero ------- "+i+"----- Usuario - vacio  contraseña - vacio \"];");                          
                               conexiones+=i+"->"+k+";\n";
                         }                     
                        
