@@ -1,7 +1,4 @@
-digraph g {rankdir=LR;node[shape=record]splines=ortho;subgraph cluster1 {  rank=same;NC[label="(*)"];y[label="\\"];yc1[label="c1"];yc2[label="c2"];yc3[label="c3"];yc4[label="c4"];yc5[label="c5"];yc454[label="c454"];NC->y->yc1->yc2->yc3->yc4->yc5->yc454[constraint=false];}x[label="\\"];xc1[label="c1"];xc2[label="c2"];xc3[label="c3"];xc4[label="c4"];xc5[label="c5"];xc454[label="c454"];c454[label=" c2\\c454"];
-c5[label=" c1\\c5"];
-c4[label=" c1\\c4"];
-c3[label=" \\\c3"];
+digraph g {rankdir=LR;node[shape=record]splines=ortho;subgraph cluster1 {  rank=same;NC[label="(*)"];y[label="\\"];yc1[label="c1"];yc2[label="c2"];yc65[label="c65"];NC->y->yc1->yc2->yc65[constraint=false];}x[label="\\"];xc1[label="c1"];xc2[label="c2"];xc65[label="c65"];c65[label=" \\\c65"];
 c2[label=" \\\c2"];
 c1[label=" \\\c1"];
-NC->x->xc1->xc2->xc3->xc4->xc5->xc454;y ->c1->c2->c3;yc1->c4->c5;yc2->c454;xc1->c1;xc2->c2;xc3->c3;xc4->c4;xc5->c5;xc454->c454;}
+NC->x->xc1->xc2->xc65;y ->c1->c2->c65;xc1->c1;xc2->c2;xc65->c65;}
