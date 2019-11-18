@@ -278,8 +278,13 @@ public class DLL {
               if (node.usuario.equals(usuario)) {
                   if (node.nombredir.equals(nombrearch)) {
                       node.nombredir=modificacion;
-                      estado=1;
-                       JOptionPane.showMessageDialog(null," MODIFICACION EXITOSA " );
+                      estado=1;                      
+                  }
+                  if (node.rutay.equals(nombrearch)) {
+                      node.rutay=modificacion;
+                  }
+                  if (node.rutax.equals(nombrearch)) {
+                      node.rutax=modificacion;
                   }
               }
             last = node; 
@@ -287,7 +292,9 @@ public class DLL {
         }
           if (estado!=1) {
              JOptionPane.showMessageDialog(null," MODIFICAION ERRONEA " );
-         }
+         }else{
+               JOptionPane.showMessageDialog(null," MODIFICACION EXITOSA " );
+          }
         
     }
      public  void descargar(Node node,String usuario,String nombrearch) throws IOException{
