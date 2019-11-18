@@ -1,1 +1,18 @@
-digraph g {}
+digraph g {simonlxls[shape=record, label="<C0>| nombre : simon.xls
+ contenido : jajajaja|<C1>"];
+holaltxt[shape=record, label="<C0>| nombre : hola.txt
+ contenido : comoestas|<C1>"];
+teleltxt[shape=record, label="<C0>| nombre : tele.txt
+ contenido : quiero ganar|<C1>"];
+mundoltxt[shape=record, label="<C0>| nombre : mundo.txt
+ contenido : mi mundo|<C1>"];
+archivoltxt[shape=record, label="<C0>| nombre : archivo.txt
+ contenido : como voy|<C1>"];
+ahivamosltxt[shape=record, label="<C0>| nombre : ahivamos.txt
+ contenido : ahorita vemos que pedo|<C1>"];
+teleltxt->holaltxt;
+teleltxt->archivoltxt;
+holaltxt->simonlxls;
+archivoltxt->mundoltxt;
+archivoltxt->ahivamosltxt;
+}

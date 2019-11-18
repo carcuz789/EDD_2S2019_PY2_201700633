@@ -182,11 +182,13 @@ public class DLL {
     public String Contenido(Node node,String usuario,String nombrearch){
          Node last = null;
          int estado=0;
+         String contenido="";
           while (node != null) { 
      
               if (node.usuario.equals(usuario)) {
                   if (node.nombredir.equals(nombrearch)) {
                       estado=1;
+                      contenido=node.tipo;
                   }
               }
             last = node; 
@@ -195,7 +197,7 @@ public class DLL {
           if (estado==0) {
             return "false";
         }else{
-              return node.tipo;
+              return contenido;
           }
     }
     public String RetornarNodos(Node node,String usuario){
