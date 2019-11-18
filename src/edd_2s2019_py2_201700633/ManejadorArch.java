@@ -101,6 +101,7 @@ int ver=0;
         jb_reportesParalosUd = new javax.swing.JButton();
         jb_abrircarpeta = new javax.swing.JButton();
         jb_reporteusuarios = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -299,6 +300,13 @@ int ver=0;
             }
         });
 
+        jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -310,7 +318,9 @@ int ver=0;
                 .addComponent(jb_cargausuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jb_reporteusuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -328,7 +338,8 @@ int ver=0;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jb_cargausuarios)
-                    .addComponent(jb_reporteusuarios))
+                    .addComponent(jb_reporteusuarios)
+                    .addComponent(jButton2))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -602,22 +613,52 @@ int ver=0;
 
     private void jb_reportesParalosUdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_reportesParalosUdActionPerformed
         // TODO add your handling code here:
-        ini.ListaGen.printlist(ListaGen.head);   
-        crearGrafo();
-        ARBOLIN();
-        Ortogonal();
-        File file = new File( "C:\\Users\\Rodrigo Carcuz\\Desktop\\EDD_2S2019_PY2_201700633\\grafon.jpg" );
-        File file1 = new File( "C:\\Users\\Rodrigo Carcuz\\Desktop\\EDD_2S2019_PY2_201700633\\AVL.jpg" );
-        
-        File file3 = new File( "C:\\Users\\Rodrigo Carcuz\\Desktop\\EDD_2S2019_PY2_201700633\\ortogonal.jpg" );
+          String Arch = JOptionPane.showInputDialog("1. ARBOL DE ARCHIVOS \n 2.MATRIZ CARPETAS \n 3. GRAFO CARPETAS");
+        switch(Arch){
+            case "1":
+                ARBOLIN();
+                   File file1 = new File( "C:\\Users\\Rodrigo Carcuz\\Desktop\\EDD_2S2019_PY2_201700633\\AVL.jpg" );
+                   
     try {
-        Desktop.getDesktop().open(file);
+        
         Desktop.getDesktop().open(file1);
+        
+       
+    } catch (IOException ex) {
+        Logger.getLogger(ManejadorArch.class.getName()).log(Level.SEVERE, null, ex);
+    }
+                break;
+            case "2":
+                Ortogonal();
+                  File file3 = new File( "C:\\Users\\Rodrigo Carcuz\\Desktop\\EDD_2S2019_PY2_201700633\\ortogonal.jpg" );
+            
+    try {
+        
         
         Desktop.getDesktop().open(file3);
     } catch (IOException ex) {
         Logger.getLogger(ManejadorArch.class.getName()).log(Level.SEVERE, null, ex);
     }
+                break;
+            case "3":
+                crearGrafo();
+                    File file = new File( "C:\\Users\\Rodrigo Carcuz\\Desktop\\EDD_2S2019_PY2_201700633\\grafon.jpg" );
+               
+    try {
+        Desktop.getDesktop().open(file);
+        
+    } catch (IOException ex) {
+        Logger.getLogger(ManejadorArch.class.getName()).log(Level.SEVERE, null, ex);
+    }
+                break;
+        }
+        
+        
+        
+    
+     
+        
+      
     }//GEN-LAST:event_jb_reportesParalosUdActionPerformed
 
     private void jb_abrircarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_abrircarpetaActionPerformed
@@ -824,6 +865,11 @@ int ver=0;
         JOptionPane.showMessageDialog(null,"ARCHIVO NO ENCONTRADO");
     }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
  public static String getSHA256(String input){
 
 	String toReturn = null;
@@ -845,6 +891,7 @@ int ver=0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
